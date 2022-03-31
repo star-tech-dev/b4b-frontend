@@ -1,21 +1,13 @@
 import { createApp } from 'vue'
-// import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import messages from './lang'
+import i18n from './locale/i18n'
 
 import LayoutDefault from '@/layouts/DefaultLayout.vue'
 import LayoutSimple from '@/layouts/SimpleLayout.vue'
 
-// const i18n = createI18n({
-//   legacy: false,
-//   locale: 'ru',
-//   fallbackLocale: 'en',
-//   messages
-// })
-
-const app = createApp(App)
+const app = createApp(App).use(i18n).use(i18n)
 
 // app.use(i18n)
 app.use(router)

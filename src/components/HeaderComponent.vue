@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import logoImage from '@/assets/svg/logo.svg'
+
+const { t } = useI18n()
+
+const onLogin = () => {
+  console.log('onLogin')
+}
 </script>
 
 <template>
@@ -11,15 +18,38 @@ import logoImage from '@/assets/svg/logo.svg'
       </RouterLink>
 
       <nav class="flex a-center">
-        <RouterLink to="/strategies">Стратегии</RouterLink>
-        <RouterLink to="/cards">Карты</RouterLink>
-        <RouterLink to="/weapon">Оружие</RouterLink>
-        <RouterLink to="/cleaners">Чистильщики</RouterLink>
-        <a class="active" href="#" @click.prevent>Войти</a>
+        <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
+        <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
+        <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>
+        <RouterLink to="/cleaners">{{ t('nav.cleaners') }}</RouterLink>
+        <a class="active" href="#" @click.prevent="onLogin">{{ t('nav.login') }}</a>
       </nav>
     </div>
   </header>
 </template>
+
+<i18n>
+{
+  "ru": {
+    "nav": {
+      "strategies": "Стратегии",
+      "cards": "Карты",
+      "weapon": "Оружие",
+      "cleaners": "Чистильщики",
+      "login": "Войти"
+    }
+  },
+  "en": {
+    "nav": {
+      "strategies": "Strategies",
+      "cards": "Cards",
+      "weapon": "Weapon",
+      "cleaners": "Cleaners",
+      "login": "Log in"
+    }
+  }
+}
+</i18n>
 
 <style lang="scss" scoped>
 @import "src/assets/scss/variables";
