@@ -1,0 +1,9 @@
+@import "variables";
+
+%h1 {
+  font-size: 32px;
+  line-height: 72px;
+  font-weight: $font-weight-bold;
+  margin: 0 auto;
+  color: $color-text-white;
+}

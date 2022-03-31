@@ -1,0 +1,66 @@
+// core
+@import 'variables/index';
+@import 'reset';
+@import 'mixins';
+@import 'utils';
+@import 'extends';
+
+// fonts
+@include font-face('Montserrat', '@/assets/fonts/montserrat/Montserrat-Regular', $font-weight-normal);
+@include font-face('Montserrat', '@/assets/fonts/montserrat/Montserrat-Medium', $font-weight-medium);
+@include font-face('Montserrat', '@/assets/fonts/montserrat/Montserrat-SemiBold', $font-weight-semibold);
+@include font-face('Montserrat', '@/assets/fonts/montserrat/Montserrat-Bold', $font-weight-bold);
+
+@include font-face('SF Pro Display', '@/assets/fonts/sf_pro_display/SFProDisplay-Bold', $font-weight-bold);
+@include font-face('SF Pro Text', '@/assets/fonts/sf_pro_display/SFProText-Bold', $font-weight-bold);
+
+/**
+ * Global styles
+ */
+body {
+  font-family: $font-family-default;
+  font-size: $font-size-default;
+  line-height: $line-height-default;
+  font-weight: $font-weight-normal;
+  color: $color-text-regular;
+  background: $color-page-bg;
+}
+
+::-webkit-input-placeholder { color: rgba($color-text-regular, .5); }
+::-moz-placeholder { color: rgba($color-text-regular, .5); }
+:-ms-input-placeholder { color: rgba($color-text-regular, .5); }
+
+a:not([class]),
+a:not([class=""]),
+a[class=""], {
+  color: $color-primary;
+}
+
+// router change effect
+.page {
+  transition: $transition-page;
+}
+.page-enter-active, .page-leave-active {
+  opacity: 0;
+  transform: translate(0, 10px);
+}
+
+.container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &.-wide {
+    width: 1200px;
+  }
+
+  &.-responsive {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+h1, .h1 {
+  @extend %h1;
+}
