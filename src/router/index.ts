@@ -87,10 +87,7 @@ const router = createRouter({
   ]
 })
 
-console.log('router', router.getRoutes())
-
 router.beforeEach(async (to, from, next) => {
-  console.log('router.beforeEach', to)
   // if (!store.state.auth.user) {
   //   const { user } = await store.dispatch('auth/check').catch(() => ({ user: null }))
   //   await store.dispatch('auth/setUser', user)
