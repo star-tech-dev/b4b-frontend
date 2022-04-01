@@ -7,7 +7,6 @@ import UIButton from '@/components/ui/UIButton.vue'
 import sliderImage from '@/assets/img/slider_1.png'
 
 const { t } = useI18n()
-console.log('strategyMock', strategyMock)
 </script>
 
 <template>
@@ -38,6 +37,8 @@ console.log('strategyMock', strategyMock)
 
         <div class="flex column center">
           <div class="top-strategy-list">
+            <StrategyItem :data="strategyMock" />
+            <StrategyItem :data="strategyMock" />
             <StrategyItem :data="strategyMock" />
           </div>
 
@@ -110,6 +111,12 @@ console.log('strategyMock', strategyMock)
 
   .top-strategy-list {
     margin: 70px auto 50px;
+
+    & > * {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 </style>
