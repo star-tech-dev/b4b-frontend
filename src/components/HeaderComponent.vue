@@ -86,6 +86,7 @@ header {
 
       &:hover {
         color: $color-primary;
+        text-decoration: none;
       }
 
       &.router-link-active,
