@@ -7,9 +7,9 @@ import i18n from './locale/i18n'
 import LayoutDefault from '@/layouts/DefaultLayout.vue'
 import LayoutSimple from '@/layouts/SimpleLayout.vue'
 
-const app = createApp(App).use(i18n).use(i18n)
+const app = createApp(App)
 
-// app.use(i18n)
+app.use(i18n)
 app.use(router)
 app.use(store)
 

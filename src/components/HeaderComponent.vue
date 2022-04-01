@@ -5,6 +5,8 @@ import logoImage from '@/assets/svg/logo.svg'
 
 const { t } = useI18n()
 
+console.log('t', useI18n())
+
 const onLogin = () => {
   console.log('onLogin')
 }
@@ -18,10 +20,10 @@ const onLogin = () => {
       </RouterLink>
 
       <nav class="flex a-center">
-        <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
-        <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
-        <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>
-        <RouterLink to="/cleaners">{{ t('nav.cleaners') }}</RouterLink>
+        <RouterLink to="/strategies">{{ t('navigation.strategies') }}</RouterLink>
+        <RouterLink to="/cards">{{ t('navigation.cards') }}</RouterLink>
+        <RouterLink to="/weapon">{{ t('navigation.weapon') }}</RouterLink>
+        <RouterLink to="/cleaners">{{ t('navigation.cleaners') }}</RouterLink>
         <a class="active" href="#" @click.prevent="onLogin">{{ t('nav.login') }}</a>
       </nav>
     </div>
@@ -32,19 +34,11 @@ const onLogin = () => {
 {
   "ru": {
     "nav": {
-      "strategies": "Стратегии",
-      "cards": "Карты",
-      "weapon": "Оружие",
-      "cleaners": "Чистильщики",
       "login": "Войти"
     }
   },
   "en": {
     "nav": {
-      "strategies": "Strategies",
-      "cards": "Cards",
-      "weapon": "Weapon",
-      "cleaners": "Cleaners",
       "login": "Log in"
     }
   }

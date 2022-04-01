@@ -24,9 +24,24 @@ function loadLocaleMessages () {
   // return messages
 }
 
+const decideCurrentLocale = () => {
+  const storedValue = window.localStorage.getItem('locale')
+  console.log('storedValue', storedValue)
+  const locale = storedValue || 'en'
+  window.localStorage.setItem('locale', locale)
+  return locale
+}
+
+export const setLocale = (i18n: any, locale: string) => {
+  window.localStorage.setItem('locale', locale)
+  i18n.locale.value = locale
+}
+
 export default createI18n({
   legacy: false,
-  locale: (import.meta.env.VITE_I18N_LOCALE || 'en') as string,
-  fallbackLocale: (import.meta.env.VITE_I18N_FALLBACK_LOCALE || 'en') as string,
+  locale: decideCurrentLocale(),
+  fallbackLocale: 'en',
+  // availableLocales: ['ru', 'en'],
+  localeDir: './messages',
   messages: loadLocaleMessages()
 })
