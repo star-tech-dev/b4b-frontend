@@ -31,6 +31,7 @@ import logoImage from '@/assets/img/logo.svg'
 @import "src/assets/scss/variables";
 
 footer {
+  margin-top: 100px;
   padding: 40px 0;
 
   .copyright {

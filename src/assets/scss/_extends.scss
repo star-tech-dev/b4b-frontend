@@ -13,3 +13,9 @@
   font-weight: $font-weight-bold;
   color: $color-text-white;
 }
+
+%dark-block {
+  background: $color-bg-dark;
+  color: $color-text-regular;
+  border-radius: $border-radius-default;
+}
