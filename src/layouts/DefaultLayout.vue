@@ -15,23 +15,11 @@ import FooterComponent from '@/components/FooterComponent.vue'
   </div>
 </template>
 
-<style lang="scss" scoped>
-.layout.-default {
-  main {
-    margin-top: 80px;
-    margin-bottom: 60px;
-  }
-}
-</style>
-
 <style lang="scss">
 .layout.-default {
-  .page {
-    section {
-      &:not(:last-child) {
-        margin-bottom: 40px;
-      }
-    }
+  & > .page {
+    margin-top: 80px;
+    margin-bottom: 60px;
   }
 }
 </style>

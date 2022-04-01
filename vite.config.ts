@@ -11,6 +11,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueI18n({
+      // globalSFCScope: true,
       compositionOnly: false,
       include: path.resolve(__dirname, './src/locale/messages/**')
     })

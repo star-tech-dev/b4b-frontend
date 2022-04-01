@@ -1,6 +1,8 @@
 import { createI18n } from 'vue-i18n'
-import ru from './messages/ru'
-import en from './messages/ru'
+import ru from '@/locale/messages/ru'
+import en from '@/locale/messages/ru'
+// import ru from './messages/ru'
+// import en from './messages/ru'
 
 /**
  * Load locale messages
@@ -9,9 +11,6 @@ import en from './messages/ru'
  * See: https://github.com/intlify/vue-i18n-loader#rocket-i18n-resource-pre-compilation
  */
 function loadLocaleMessages () {
-  return {
-    ru, en
-  }
   // const locales = require.context('./locale/messages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   // const messages = {}
   // locales.keys().forEach(key => {
@@ -35,13 +34,18 @@ const decideCurrentLocale = () => {
 export const setLocale = (i18n: any, locale: string) => {
   window.localStorage.setItem('locale', locale)
   i18n.locale.value = locale
+  window.location.reload()
 }
 
+console.log('loadLocaleMessages', loadLocaleMessages())
+
 export default createI18n({
+  // globalInjection: true,
   legacy: false,
   locale: decideCurrentLocale(),
   fallbackLocale: 'en',
   // availableLocales: ['ru', 'en'],
   localeDir: './messages',
-  messages: loadLocaleMessages()
+  // messages: loadLocaleMessages()
+  messages: { ru: {}, en: {} }
 })

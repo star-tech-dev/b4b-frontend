@@ -1,47 +1,68 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { setLocale } from '@/locale/i18n'
-
-const i18n = useI18n({
-  useScope: 'global'
-})
-console.log('i18n', i18n.locale.value)
-
-const onLocaleChange = (locale: any) => {
-  console.log('onLocaleChange to', locale)
-  setLocale(i18n, locale)
-  // i18n.locale.value = locale
-}
-
-const currentLang = computed(() => i18n.locale.value)
+import logoImage from '@/assets/img/logo.svg'
 </script>
 
 <template>
   <footer>
     <div class="container -wide flex a-center j-between">
-      <div>footer</div>
       <div>
-        <div>lang: {{ currentLang }}</div>
+        <div>
+          <img :src="logoImage" alt="">
+        </div>
+        <div class="copyright">Back 4 Blood fan website @ Powered by STAR-tech, 2022</div>
+      </div>
 
-        <div class="flex a-center" hidden>
-          <div>
-            <a href="#" @click.prevent="onLocaleChange('ru')">to ru</a>
-          </div>
-          <div>&nbsp;</div>
-          <div>
-            <a href="#" @click.prevent="onLocaleChange('en')">to en</a>
-          </div>
+      <div class="flex a-start">
+        <div class="column">
+          <div class="column-title">Обратная связь</div>
+          <a href="mailto:help@b4b.fan" target="_blank">help@b4b.fan</a>
         </div>
 
-        <div>
-          <select :value="i18n.locale.value" @change="(e) => onLocaleChange(e.target.value)">
-            <option v-for="locale in i18n.availableLocales" :key="`locale-${locale}`" :value="locale">
-              {{ locale }}
-            </option>
-          </select>
+        <div class="column -align-right">
+          <div class="column-title">Другие проекты</div>
+          <a href="https://passwords.star-tech.dev/" target="_blank" rel="noreferrer">Password manager</a>
         </div>
       </div>
     </div>
   </footer>
 </template>
+
+<style lang="scss" scoped>
+@import "src/assets/scss/variables";
+
+footer {
+  padding: 40px 0;
+
+  .copyright {
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 15px;
+    color: $color-text-dark;
+    font-weight: $font-weight-medium;
+  }
+
+  .column {
+    &:not(:last-child) {
+      margin-right: 60px;
+    }
+
+    a {
+      color: $color-text-white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.-align-right {
+      text-align: right;
+    }
+  }
+
+  .column-title {
+    margin-bottom: 20px;
+    color: $color-text-dark;
+  }
+}
+</style>

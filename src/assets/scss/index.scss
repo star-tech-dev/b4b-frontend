@@ -34,6 +34,11 @@ a:not([class]),
 a:not([class=""]),
 a[class=""], {
   color: $color-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 // router change effect

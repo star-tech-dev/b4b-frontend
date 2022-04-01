@@ -67,3 +67,11 @@
   opacity: .5;
   pointer-events: none;
 }
+
+.buttons {
+  & > * {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}

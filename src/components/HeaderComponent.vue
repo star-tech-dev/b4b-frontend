@@ -1,29 +1,43 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import logoImage from '@/assets/svg/logo.svg'
+import { setLocale } from '@/locale/i18n'
 
-const { t } = useI18n()
+import logoImage from '@/assets/img/logo.svg'
 
-console.log('t', useI18n())
+const i18n = useI18n()
+const t = i18n.t
 
 const onLogin = () => {
   console.log('onLogin')
+}
+
+const onLocaleChange = (locale: any) => {
+  console.log('onLocaleChange to', locale)
+  setLocale(i18n, locale)
 }
 </script>
 
 <template>
   <header>
     <div class="container -responsive flex a-center j-between">
-      <RouterLink to="/">
-        <img :src="logoImage" alt="">
-      </RouterLink>
+      <div class="flex a-center">
+        <RouterLink to="/">
+          <img :src="logoImage" alt="">
+        </RouterLink>
+
+        <select class="lang" :value="i18n.locale.value" @change="(e) => onLocaleChange(e.target.value)">
+          <option v-for="locale in i18n.availableLocales" :key="`locale-${locale}`" :value="locale">
+            {{ locale }}
+          </option>
+        </select>
+      </div>
 
       <nav class="flex a-center">
-        <RouterLink to="/strategies">{{ t('navigation.strategies') }}</RouterLink>
-        <RouterLink to="/cards">{{ t('navigation.cards') }}</RouterLink>
-        <RouterLink to="/weapon">{{ t('navigation.weapon') }}</RouterLink>
-        <RouterLink to="/cleaners">{{ t('navigation.cleaners') }}</RouterLink>
+        <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
+        <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
+        <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>
+        <RouterLink to="/cleaners">{{ t('nav.cleaners') }}</RouterLink>
         <a class="active" href="#" @click.prevent="onLogin">{{ t('nav.login') }}</a>
       </nav>
     </div>
@@ -34,11 +48,19 @@ const onLogin = () => {
 {
   "ru": {
     "nav": {
+      "strategies": "Стратегии",
+      "cards": "Карты",
+      "weapon": "Оружие",
+      "cleaners": "Чистильщики",
       "login": "Войти"
     }
   },
   "en": {
     "nav": {
+      "strategies": "Strategies",
+      "cards": "Cards",
+      "weapon": "Weapon",
+      "cleaners": "Cleaners",
       "login": "Log in"
     }
   }
@@ -50,6 +72,10 @@ const onLogin = () => {
 
 header {
   padding: 20px 0;
+
+  .lang {
+    margin-left: 40px;
+  }
 
   nav {
     & > * {
