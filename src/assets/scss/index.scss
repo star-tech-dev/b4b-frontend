@@ -35,6 +35,7 @@ a:not([class=""]),
 a[class=""], {
   color: $color-primary;
   text-decoration: none;
+  transition: $transition-default;
 
   &:hover {
     text-decoration: underline;

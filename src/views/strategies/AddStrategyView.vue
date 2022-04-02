@@ -1,18 +1,48 @@
 <script setup lang="ts">
-//
+import { reactive } from 'vue'
+
+import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import UIDropdown from '@/components/ui/UIDropdown.vue'
+
+const state = reactive({
+  role: null,
+  cleaners: []
+})
 </script>
 
 <template>
   <div class="page -add-strategy">
     <div class="container">
+      <BreadCrumbs />
+
       <section class="flex">
         <div class="block -primary">
           <div class="title">
-            <div>Deck title</div>
+            <input placeholder="Deck title" />
           </div>
-          <div>
-            selects
+
+          <div class="dropdowns">
+            <UIDropdown
+                v-model="state.role"
+                :values="[]"
+            >
+              Роль
+            </UIDropdown>
+            <UIDropdown
+                v-model="state.subroles"
+                :values="[]"
+            >
+              Саброли
+            </UIDropdown>
+            <UIDropdown
+              v-model="state.cleaners"
+              :values="['Doc', 'Mom']"
+              multiple
+            >
+              Чистильщики
+            </UIDropdown>
           </div>
+
           <div class="actions">
             <a href="#" @click.prevent>save</a>
           </div>
@@ -58,6 +88,16 @@
 
       .title {
         padding: 32px 40px 20px;
+      }
+
+      .dropdowns {
+        padding: 0 14px;
+
+        & > * {
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
       }
 
       .actions {

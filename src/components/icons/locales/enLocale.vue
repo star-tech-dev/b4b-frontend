@@ -1,10 +1,10 @@
 <template>
   <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g id="New-deck" transform="translate(-272.000000, -82.000000)" fill-rule="nonzero">
-        <g id="Group" transform="translate(272.000000, 82.000000)">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-272.000000, -82.000000)" fill-rule="nonzero">
+        <g transform="translate(272.000000, 82.000000)">
           <circle id="Oval" fill="#F0F0F0" cx="9" cy="9" r="9"></circle>
-          <g transform="translate(0.310043, 1.956516)" fill="#D80027" id="Path">
+          <g transform="translate(0.310043, 1.956516)" fill="#D80027">
             <path d="M8.29866797,7.04348438 L17.689957,7.04348438 C17.689957,6.23116406 17.5816758,5.44422656 17.3799141,4.69564453 L8.29866797,4.69564453 L8.29866797,7.04348438 Z"></path>
             <path d="M8.29866797,2.34783984 L16.3689961,2.34783984 C15.8180625,1.44882422 15.1136367,0.6541875 14.2923164,4.99600361e-16 L8.29866797,4.99600361e-16 L8.29866797,2.34783984 Z"></path>
             <path d="M8.68995703,16.0434844 C10.8080859,16.0434844 12.7549336,15.3113906 14.2923164,14.0869688 L3.08759766,14.0869688 C4.62498047,15.3113906 6.57182813,16.0434844 8.68995703,16.0434844 Z"></path>
