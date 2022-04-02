@@ -79,7 +79,6 @@ const init = () => {
       maintainAspectRatio: false
     }
   })
-  console.log('myChart', myChart)
 }
 
 onMounted(() => {

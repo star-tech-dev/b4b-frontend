@@ -25,7 +25,6 @@ function loadLocaleMessages () {
 
 const decideCurrentLocale = () => {
   const storedValue = window.localStorage.getItem('locale')
-  console.log('storedValue', storedValue)
   const locale = storedValue || 'en'
   window.localStorage.setItem('locale', locale)
   return locale
@@ -36,8 +35,6 @@ export const setLocale = (i18n: any, locale: string) => {
   i18n.locale.value = locale
   window.location.reload()
 }
-
-console.log('loadLocaleMessages', loadLocaleMessages())
 
 export default createI18n({
   // globalInjection: true,

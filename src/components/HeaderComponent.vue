@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { setLocale } from '@/locale/i18n'
 
+import LocaleSwitcher from '@/components/locale/LocaleSwitcher.vue'
 import logoImage from '@/assets/img/logo.svg'
 
-const i18n = useI18n()
-const t = i18n.t
+const { t } = useI18n()
 
 const onLogin = () => {
   console.log('onLogin')
-}
-
-const onLocaleChange = (locale: any) => {
-  console.log('onLocaleChange to', locale)
-  setLocale(i18n, locale)
 }
 </script>
 
@@ -22,15 +16,11 @@ const onLocaleChange = (locale: any) => {
   <header>
     <div class="container -responsive flex a-center j-between">
       <div class="flex a-center">
-        <RouterLink to="/">
+        <RouterLink to="/" class="logo">
           <img :src="logoImage" alt="">
         </RouterLink>
 
-        <select class="lang" :value="i18n.locale.value" @change="(e) => onLocaleChange(e.target.value)">
-          <option v-for="locale in i18n.availableLocales" :key="`locale-${locale}`" :value="locale">
-            {{ locale }}
-          </option>
-        </select>
+        <LocaleSwitcher />
       </div>
 
       <nav class="flex a-center">
@@ -73,8 +63,8 @@ const onLocaleChange = (locale: any) => {
 header {
   padding: 20px 0;
 
-  .lang {
-    margin-left: 40px;
+  .logo {
+    margin-right: 40px;
   }
 
   nav {

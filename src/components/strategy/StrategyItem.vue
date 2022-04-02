@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { StrategyProps } from '@/models/strategy'
 import { reactive, withDefaults } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Strategy } from '@/models/strategy'
 
 import Liker from '@/components/LikerComponent.vue'
@@ -12,15 +13,14 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {})
 const data = reactive(new Strategy(props.data))
+const { t } = useI18n()
 
 const onLike = (value: number) => {
-  console.log('onLike', value)
   data.likes = value
   data.liked = true
 }
 
 const onDislike = (value: number) => {
-  console.log('onDislike', value)
   data.likes = value
   data.liked = false
 }
@@ -38,7 +38,7 @@ const onDislike = (value: number) => {
         </div>
       </div>
       <div class="flex a-center j-between">
-        <RouterLink :to="`/strategies/${data.id}`">Подробнее</RouterLink>
+        <RouterLink :to="`/strategies/${data.id}`">{{ t('more') }}</RouterLink>
         <Liker v-model="data.likes" :liked="data.liked" @like="onLike" @dislike="onDislike" />
       </div>
     </div>
@@ -52,6 +52,17 @@ const onDislike = (value: number) => {
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "ru": {
+    "more": "Подробнее"
+  },
+  "en": {
+    "more": "More info"
+  }
+}
+</i18n>
 
 <style lang="scss" scoped>
 @import "src/assets/scss/variables";
