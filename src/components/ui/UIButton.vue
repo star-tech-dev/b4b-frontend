@@ -5,8 +5,9 @@ import { RouterLink } from 'vue-router'
 interface Props {
   to?: string,
   href?: string,
-  theme?: 'default' | 'dark',
-  type?: string
+  theme?: 'default' | 'dark' | 'ghost' | 'ghost-primary',
+  type?: string,
+  fullWidth?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,9 +26,9 @@ const buttonProps = tag === 'button'
     :is="tag"
     :to="props.to"
     v-bind="buttonProps"
-    :class="`button -theme-${props.theme}`"
+    :class="`ui-button -theme-${props.theme} ${props.fullWidth ? '-full-width' : ''}`"
   >
-    <span class="content">
+    <span class="content flex center">
       <slot />
     </span>
   </component>
@@ -36,7 +37,7 @@ const buttonProps = tag === 'button'
 <style lang="scss" scoped>
 @import "src/assets/scss/variables";
 
-.button {
+.ui-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -71,6 +72,41 @@ const buttonProps = tag === 'button'
       &:hover {
         background: $color-bg-light;
       }
+    }
+
+    &-ghost {
+      background: transparent;
+      color: $color-text-dark;
+
+      &:hover {
+        background: $color-bg;
+        color: $color-text-white;
+      }
+    }
+
+    &-ghost-primary {
+      background: transparent;
+      color: $color-primary;
+
+      &:hover {
+        background: $color-bg;
+        color: $color-primary;
+      }
+    }
+  }
+
+  &.-full-width {
+    width: 100%;
+  }
+}
+</style>
+
+<style lang="scss">
+.ui-button {
+  .content {
+    svg {
+      margin-right: 15px;
+      min-width: 22px;
     }
   }
 }
