@@ -60,7 +60,8 @@ export default {
       publish: 'Опубликовать',
       recommended_weapon: 'Рекомендованное оружие',
       unwanted_weapon: 'Нежелательное оружие',
-      weapon_strategy: 'Стратегия по оружию'
+      weapon_strategy: 'Стратегия по оружию',
+      selected_cards: 'Выбранные карты'
     }
   }
 }

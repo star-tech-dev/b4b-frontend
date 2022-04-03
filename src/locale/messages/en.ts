@@ -60,7 +60,8 @@ export default {
       publish: 'Publish the strategy',
       recommended_weapon: 'Recommended weapon',
       unwanted_weapon: 'Unwanted weapon',
-      weapon_strategy: 'Weapon strategy'
+      weapon_strategy: 'Weapon strategy',
+      selected_cards: 'Selected cards'
     }
   }
 }

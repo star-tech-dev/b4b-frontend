@@ -143,8 +143,8 @@ const onValueChange = (e: any) => {
     transition: $transition-dropdown;
 
     .label {
-      margin-bottom: 2px;
-      font-size: 11px;
+      margin-bottom: 4px;
+      font-size: 12px;
       line-height: 14px;
       color: $color-text-dark;
     }
@@ -214,6 +214,7 @@ const onValueChange = (e: any) => {
       }
       .options {
         box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.05);
+        border-top: 1px solid $color-bg;
       }
     }
 

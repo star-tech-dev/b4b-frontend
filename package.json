@@ -12,6 +12,7 @@
   "dependencies": {
     "@star-tech/api": "^0.1.0",
     "chart.js": "^3.7.1",
+    "swiper": "^8.0.7",
     "vue": "^3.2.31",
     "vue-i18n": "^9.1.0",
     "vue-router": "^4.0.12",

@@ -6,6 +6,7 @@ import config from '@/config'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
 import UIButton from '@/components/ui/UIButton.vue'
 import UIDropdown from '@/components/ui/UIDropdown.vue'
+import CardPicker from '@/components/cards/CardPicker.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconBookmark from '@/components/icons/IconBookmark.vue'
 import IconCheckRound from '@/components/icons/IconCheckRound.vue'
@@ -148,15 +149,7 @@ const save = () => {
         </div>
       </section>
 
-      <section>
-        <h3>Выбранные карты</h3>
-        <div>d</div>
-      </section>
-
-      <section>
-        <h3>Все карты</h3>
-        <div>d</div>
-      </section>
+      <CardPicker />
     </div>
   </div>
 </template>
