@@ -1,26 +1,66 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import vClickOutside from '@/directives/v-click-outside'
 
 import IconAngle from '@/components/icons/AngleIcon.vue'
+import UICheckbox from '@/components/ui/UICheckbox.vue'
 
 interface Props {
   modelValue?: any,
   values?: any[],
-  multiple?: boolean
+  multiple?: boolean,
+  disabled?: boolean
 }
 
+const { t } = useI18n()
+const emit = defineEmits(['update:modelValue'])
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   values: () => [],
   multiple: false
 })
 
+const normalizeValues = () => {
+  return props.values.map(value => ({
+    label: value.label || value,
+    value: value.value || value
+  }))
+}
+
 const state = reactive({
-  show: false
+  show: false,
+  localValue: props.modelValue,
+  localValues: normalizeValues(),
+  valueState: {} as any,
+  groupName: Math.random().toFixed(10).slice(2)
 })
 
-const valueText = computed(() => props.modelValue || 'select')
+const parentClassList = computed(() => `ui-dropdown ${state.show ? '-opened' : ''} ${props.disabled ? 'disabled' : ''}`)
+
+props.values.forEach(value => {
+  props.multiple
+      ? state.valueState[value.value] = props.modelValue.includes(value.value)
+      : state.valueState[value.value] = props.modelValue === value.value
+})
+
+const valueText = computed(() => {
+  if (!props.modelValue?.length) {
+    return t('globals.not_selected')
+  }
+  if (props.multiple) {
+    const normalizedValues = props.modelValue.map((i: any) => {
+      const localValue = state.localValues.find(j => j.value === i)
+      return localValue?.label || localValue?.value || localValue
+    })
+    if (normalizedValues.length > 2) {
+      return `${normalizedValues.length} ${t('globals.selected')}`
+    }
+    return normalizedValues.join(', ')
+  }
+  const localValue = state.localValues.find(j => j.value === props.modelValue)
+  return localValue?.label || localValue?.value || localValue
+})
 
 const toggle = () => {
   state.show = !state.show
@@ -29,10 +69,24 @@ const toggle = () => {
 const close = () => {
   state.show = false
 }
+
+const onValueChange = (e: any) => {
+  if (props.multiple) {
+    state.valueState[e.target.value] = e.target.checked
+    const newValue = Object.keys(state.valueState).reduce<any[]>((prevArr, key) => {
+      return state.valueState[key] ? [...prevArr, key] : prevArr
+    }, [])
+    emit('update:modelValue', newValue)
+  } else {
+    emit('update:modelValue', e.target.value)
+    state.localValue = e.target.value
+    close()
+  }
+}
 </script>
 
 <template>
-  <div :class="`ui-dropdown ${state.show ? '-opened' : ''}`" v-click-outside="close">
+  <div :class="parentClassList" v-click-outside="close">
     <div class="select" @click="toggle">
       <div class="label">
         <slot />
@@ -46,8 +100,20 @@ const close = () => {
     </div>
 
     <div v-if="state.show" class="options">
-      <div v-for="value in props.values" :key="value">
-        <span>{{ value }}</span>
+      <div v-for="value in state.localValues" :key="value">
+        <template v-if="props.multiple">
+<!--          <UICheckbox hidden @change="onValueChange">{{ value }}</UICheckbox>-->
+          <label>
+            <input type="checkbox" :name="state.groupName" :value="value.value" :checked="state.valueState[value.value]" @change="onValueChange">
+            <span>{{ value.label }}</span>
+          </label>
+        </template>
+        <template v-else>
+          <label>
+            <input type="radio" :name="state.groupName" :value="value.value" :checked="props.modelValue === value.value" @change="onValueChange">
+            <span>{{ value.label }}</span>
+          </label>
+        </template>
       </div>
     </div>
   </div>
@@ -82,6 +148,9 @@ const close = () => {
     }
 
     .selected {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       color: $color-text-white;
     }
 
@@ -116,7 +185,7 @@ const close = () => {
     z-index: 10;
     width: 100%;
     padding: 14px 24px 16px;
-    background: $color-bg;
+    background: $color-bg-light;
     border-radius: 0 0 $border-radius-dropdown $border-radius-dropdown;
     border-top: 1px solid $color-bg-dark;
     box-shadow: $box-shadow-dropdown;
@@ -125,13 +194,21 @@ const close = () => {
   &.-opened {
     .select {
       z-index: 11;
-      background: $color-bg;
+      background: $color-bg-light;
       border-radius: $border-radius-dropdown $border-radius-dropdown 0 0;
 
       .angle {
         opacity: 1;
         visibility: visible;
         transform: rotate(270deg);
+      }
+    }
+  }
+
+  &.disabled {
+    .select {
+      .selected {
+        color: $color-text-dark;
       }
     }
   }

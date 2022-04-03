@@ -14,8 +14,31 @@ const { t } = useI18n()
 const state = reactive({
   role: null,
   cleaners: [],
-  difficulty: []
+  difficulty: ['any']
 })
+
+const roleValues = () => config.gameRoles.map(value => ({
+  label: t(`game.roles.${value}`),
+  value
+}))
+const subroleValues = () => config.gameSubroles.map(value => ({
+  label: t(`game.subroles.${value}`),
+  value
+}))
+const difficultyValues = () => {
+  const gameDifficulties = config.gameDifficulties.map(value => ({
+    label: t(`game.difficulty.${value}`),
+    value
+  }))
+  return [...gameDifficulties, {
+    label: t('game.difficulty.any'),
+    value: 'any'
+  }]
+}
+const cleanerValues = () => config.cleaners.map(value => ({
+  label: t(`cleaners.${value}`),
+  value
+}))
 
 const clear = () => {
   console.log('clear')
@@ -34,55 +57,62 @@ const save = () => {
       <section class="flex">
         <div class="block -primary">
           <div class="title">
-            <input :placeholder="t('general.strategy_name')" autofocus/>
+            <input :placeholder="t('pages.add_strategy.strategy_name')" autofocus/>
           </div>
 
           <div class="dropdowns">
             <UIDropdown
                 v-model="state.role"
-                :values="config.gameRoles"
+                :values="roleValues()"
             >
-              {{ t('general.role') }}
+              {{ t('globals.role') }}
             </UIDropdown>
             <UIDropdown
                 v-model="state.subroles"
-                :values="config.gameSubroles"
+                :values="subroleValues()"
+                multiple
+                :disabled="!state.role"
             >
-              {{ t('general.subroles') }}
+              {{ t('globals.subroles') }}
             </UIDropdown>
             <UIDropdown
                 v-model="state.cleaners"
-                :values="config.cleaners"
+                :values="cleanerValues()"
                 multiple
             >
-              {{ t('general.cleaners') }}
+              {{ t('globals.cleaners') }}
             </UIDropdown>
             <UIDropdown
                 v-model="state.difficulty"
-                :values="config.gameDifficulties"
+                :values="difficultyValues()"
+                multiple
             >
-              {{ t('general.difficulty') }}
+              {{ t('globals.difficulty') }}
             </UIDropdown>
           </div>
 
           <div class="actions">
             <UIButton theme="ghost" full-width @click="clear">
               <IconTrash/>
-              <span>{{ t('general.clear') }}</span>
+              <span>{{ t('pages.add_strategy.clear') }}</span>
             </UIButton>
             <UIButton theme="ghost" full-width @click="save">
               <IconBookmark/>
-              <span>{{ t('general.save') }}</span>
+              <span>{{ t('pages.add_strategy.save') }}</span>
             </UIButton>
             <UIButton theme="ghost-primary" full-width @click="save">
               <IconCheckRound/>
-              <span>{{ t('general.publish') }}</span>
+              <span>{{ t('pages.add_strategy.publish') }}</span>
             </UIButton>
           </div>
         </div>
 
         <div class="block -chart flex center grow">
-          chart
+          <pre>
+            <code>
+              {{ state }}
+            </code>
+          </pre>
         </div>
       </section>
 
@@ -103,37 +133,6 @@ const save = () => {
     </div>
   </div>
 </template>
-
-<i18n>
-{
-  "ru": {
-    "general": {
-      "strategy_name": "Название",
-      "role": "Роль",
-      "subroles": "Саброли",
-      "cleaners": "Чистильщики",
-      "difficulty": "Сложность",
-
-      "clear": "Очистить",
-      "save": "Сохранить",
-      "publish": "Опубликовать"
-    }
-  },
-  "en": {
-    "general": {
-      "strategy_name": "Strategy name",
-      "role": "Role",
-      "subroles": "Subroles",
-      "cleaners": "Cleaners",
-      "difficulty": "Difficulty",
-
-      "clear": "Clear form",
-      "save": "Save the strategy",
-      "publish": "Publish the strategy"
-    }
-  }
-}
-</i18n>
 
 <style lang="scss" scoped>
 @import "src/assets/scss/extends";
