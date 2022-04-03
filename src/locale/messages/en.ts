@@ -31,6 +31,13 @@ export default {
       veteran: 'Veteran',
       nightmare: 'Nightmare',
       any: 'Anyone'
+    },
+
+    weapon: {
+      sr: 'Sniper rifles',
+      ar: 'Assault rifles',
+      smg: 'SMG / Pistols',
+      shotgun: 'Shotguns'
     }
   },
 
@@ -46,11 +53,14 @@ export default {
   },
 
   pages: {
-    add_strategy: {
+    strategy: {
       strategy_name: 'Strategy name',
       clear: 'Clear form',
       save: 'Save the strategy',
-      publish: 'Publish the strategy'
+      publish: 'Publish the strategy',
+      recommended_weapon: 'Recommended weapon',
+      unwanted_weapon: 'Unwanted weapon',
+      weapon_strategy: 'Weapon strategy'
     }
   }
 }

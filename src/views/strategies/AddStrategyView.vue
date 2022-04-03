@@ -14,7 +14,11 @@ const { t } = useI18n()
 const state = reactive({
   role: null,
   cleaners: [],
-  difficulty: ['any']
+  difficulty: ['any'],
+  weapon: {
+    recommended: [],
+    unwanted: []
+  }
 })
 
 const roleValues = () => config.gameRoles.map(value => ({
@@ -39,6 +43,10 @@ const cleanerValues = () => config.cleaners.map(value => ({
   label: t(`cleaners.${value}`),
   value
 }))
+const weaponValues = () => config.weaponAmmos.map(value => ({
+  label: t(`game.weapon.${value}`),
+  value
+}))
 
 const clear = () => {
   console.log('clear')
@@ -57,27 +65,30 @@ const save = () => {
       <section class="flex">
         <div class="block -primary">
           <div class="title">
-            <input :placeholder="t('pages.add_strategy.strategy_name')" autofocus/>
+            <input :placeholder="t('pages.strategy.strategy_name')" autofocus/>
           </div>
 
           <div class="dropdowns">
             <UIDropdown
                 v-model="state.role"
                 :values="roleValues()"
+                theme="dark"
             >
               {{ t('globals.role') }}
             </UIDropdown>
             <UIDropdown
                 v-model="state.subroles"
                 :values="subroleValues()"
-                multiple
+                theme="dark"
                 :disabled="!state.role"
+                multiple
             >
               {{ t('globals.subroles') }}
             </UIDropdown>
             <UIDropdown
                 v-model="state.cleaners"
                 :values="cleanerValues()"
+                theme="dark"
                 multiple
             >
               {{ t('globals.cleaners') }}
@@ -85,6 +96,7 @@ const save = () => {
             <UIDropdown
                 v-model="state.difficulty"
                 :values="difficultyValues()"
+                theme="dark"
                 multiple
             >
               {{ t('globals.difficulty') }}
@@ -94,15 +106,15 @@ const save = () => {
           <div class="actions">
             <UIButton theme="ghost" full-width @click="clear">
               <IconTrash/>
-              <span>{{ t('pages.add_strategy.clear') }}</span>
+              <span>{{ t('pages.strategy.clear') }}</span>
             </UIButton>
             <UIButton theme="ghost" full-width @click="save">
               <IconBookmark/>
-              <span>{{ t('pages.add_strategy.save') }}</span>
+              <span>{{ t('pages.strategy.save') }}</span>
             </UIButton>
             <UIButton theme="ghost-primary" full-width @click="save">
               <IconCheckRound/>
-              <span>{{ t('pages.add_strategy.publish') }}</span>
+              <span>{{ t('pages.strategy.publish') }}</span>
             </UIButton>
           </div>
         </div>
@@ -117,8 +129,23 @@ const save = () => {
       </section>
 
       <section>
-        <h3>Стратегия по оружию</h3>
-        <div>d</div>
+        <h3>{{ t('pages.strategy.weapon_strategy') }}</h3>
+        <div class="weapon-dropdowns flex a-center">
+          <UIDropdown
+              v-model="state.weapon.wanted"
+              :values="weaponValues()"
+              multiple
+          >
+            {{ t('pages.strategy.recommended_weapon') }}
+          </UIDropdown>
+          <UIDropdown
+              v-model="state.weapon.unwanted"
+              :values="weaponValues()"
+              multiple
+          >
+            {{ t('pages.strategy.unwanted_weapon') }}
+          </UIDropdown>
+        </div>
       </section>
 
       <section>
@@ -140,6 +167,10 @@ const save = () => {
 .page.-add-strategy {
   section {
     margin: 60px auto;
+
+    & > h3 {
+      margin-bottom: 20px;
+    }
   }
 
   .block {
@@ -187,6 +218,16 @@ const save = () => {
 
     &.-chart {
       margin-left: 40px;
+    }
+  }
+
+  .weapon-dropdowns {
+    & > * {
+      width: 300px;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
     }
   }
 }

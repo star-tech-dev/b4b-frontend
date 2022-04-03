@@ -10,7 +10,8 @@ interface Props {
   modelValue?: any,
   values?: any[],
   multiple?: boolean,
-  disabled?: boolean
+  disabled?: boolean,
+  theme?: 'default' | 'dark'
 }
 
 const { t } = useI18n()
@@ -18,7 +19,8 @@ const emit = defineEmits(['update:modelValue'])
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   values: () => [],
-  multiple: false
+  multiple: false,
+  theme: 'default'
 })
 
 const normalizeValues = () => {
@@ -36,7 +38,7 @@ const state = reactive({
   groupName: Math.random().toFixed(10).slice(2)
 })
 
-const parentClassList = computed(() => `ui-dropdown ${state.show ? '-opened' : ''} ${props.disabled ? 'disabled' : ''}`)
+const parentClassList = computed(() => `ui-dropdown -theme-${props.theme} ${state.show ? '-opened' : ''} ${props.disabled ? 'disabled' : ''}`)
 
 props.values.forEach(value => {
   props.multiple
@@ -202,6 +204,21 @@ const onValueChange = (e: any) => {
         visibility: visible;
         transform: rotate(270deg);
       }
+    }
+  }
+
+  &.-theme {
+    &-default {
+      .select {
+        background: $color-bg-light;
+      }
+      .options {
+        box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &-dark {
+      //
     }
   }
 

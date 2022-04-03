@@ -31,6 +31,13 @@ export default {
       veteran: 'Ветеран',
       nightmare: 'Кошмар',
       any: 'Любая'
+    },
+
+    weapon: {
+      sr: 'Снайперские винтовки',
+      ar: 'Штурмовые винтовки',
+      smg: 'Автоматы и пистолеты',
+      shotgun: 'Дробовики'
     }
   },
 
@@ -46,11 +53,14 @@ export default {
   },
 
   pages: {
-    add_strategy: {
+    strategy: {
       strategy_name: 'Название стратегии',
       clear: 'Очистить',
       save: 'Сохранить',
-      publish: 'Опубликовать'
+      publish: 'Опубликовать',
+      recommended_weapon: 'Рекомендованное оружие',
+      unwanted_weapon: 'Нежелательное оружие',
+      weapon_strategy: 'Стратегия по оружию'
     }
   }
 }
