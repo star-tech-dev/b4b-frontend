@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { onMounted, reactive } from 'vue'
 import Swiper, { Navigation } from 'swiper'
+import { cards as mockCards } from '@/mock/card'
 
 import CardItem from '@/components/cards/CardItem.vue'
 import IconAngleSlider from '@/components/icons/AngleSliderIcon.vue'
@@ -11,18 +12,18 @@ import 'swiper/css/navigation'
 
 const { t } = useI18n()
 const state = reactive({
-  swiper: null,
+  swiper: null as any,
   selected: [],
   currentPage: 1,
   totalSlides: 1
 })
 
 const slidePrev = () => {
-  console.log('state.swiper', state.swiper.slidePrev())
+  (state.swiper as any).slidePrev()
 }
 
 const slideNext = () => {
-  console.log('state.swiper', state.swiper.slideNext())
+  (state.swiper as any).slideNext()
 }
 
 onMounted(() => {
@@ -61,7 +62,8 @@ onMounted(() => {
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="grid">
-                  <div v-for="i in 10" class="card-parent flex center" :key="i">
+                  <CardItem v-for="card in mockCards" :key="card.id" :data="card" />
+                  <div v-for="i in 7" class="card-parent flex center" :key="i">
                     <CardItem />
                   </div>
                 </div>

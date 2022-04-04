@@ -6,4 +6,9 @@ export type GameDifficulty = 'recruit' | 'veteran' | 'nightmare'
 
 export type CleanerID = 'evan' | 'walker' | 'holly' | 'mom' | 'doc' | 'hoffman' | 'jim' | 'karlee'
 
-type WeaponAmmo = 'sr' | 'ar' | 'smg' | 'shotgun'
+export type WeaponAmmo = 'sr' | 'ar' | 'smg' | 'shotgun'
+
+/**
+ * Область оценки на графике
+ */
+export type StatIndicator = 'offence' | 'defence' | 'utility' | 'mobility' | 'economics'
