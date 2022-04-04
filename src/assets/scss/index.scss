@@ -26,9 +26,9 @@ body {
   background: $color-page-bg;
 }
 
-::-webkit-input-placeholder { color: rgba($color-text-regular, .5); }
-::-moz-placeholder { color: rgba($color-text-regular, .5); }
-:-ms-input-placeholder { color: rgba($color-text-regular, .5); }
+::-webkit-input-placeholder { color: $color-text-dark; }
+::-moz-placeholder { color: $color-text-dark; }
+:-ms-input-placeholder { color: $color-text-dark; }
 
 a:not([class]),
 a:not([class=""]),

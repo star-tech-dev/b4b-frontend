@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ChartDefault from '@/components/chart/ChartDefault.vue'
-import { chartData as tempData } from '@/mock/chart'
+import { randomData as tempData } from '@/mock/chart'
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import { chartData as tempData } from '@/mock/chart'
     <div class="relative">
       <div class="flex a-center j-between">
         <div class="chart">
-          <ChartDefault :data="tempData"/>
+          <ChartDefault :data="tempData()"/>
         </div>
 
         <div class="legend">
@@ -40,7 +40,7 @@ import { chartData as tempData } from '@/mock/chart'
     <div class="relative">
       <div class="flex a-center j-between">
         <div class="chart">
-          <ChartDefault theme="red" :data="tempData"/>
+          <ChartDefault theme="red" :data="tempData()"/>
         </div>
 
         <div class="legend">

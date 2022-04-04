@@ -55,7 +55,7 @@ export default {
 
   pages: {
     strategy: {
-      strategy_name: 'Название стратегии',
+      strategy_name: 'Название',
       clear: 'Очистить',
       save: 'Сохранить',
       publish: 'Опубликовать',
