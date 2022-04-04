@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconCheck from '@/components/icons/CheckIcon.vue'
 
-interface CheckboxProps {
+interface RadioProps {
   modelValue?: any,
   value?: any,
   name?: string,
@@ -9,7 +9,7 @@ interface CheckboxProps {
 }
 
 const emit = defineEmits(['change'])
-const props = withDefaults(defineProps<CheckboxProps>(), {
+const props = withDefaults(defineProps<RadioProps>(), {
   name: Math.random().toFixed(10).slice(2)
 })
 
@@ -19,10 +19,10 @@ const onChange = (e: any) => {
 </script>
 
 <template>
-  <div :class="`ui-checkbox ${props.checked ? '-checked' : ''}`">
+  <div :class="`ui-radio ${props.checked ? '-checked' : ''}`">
     <label class="inline-flex">
       <input
-          type="checkbox"
+          type="radio"
           :name="props.name"
           :value="props.value"
           :checked="props.checked"
@@ -44,7 +44,7 @@ const onChange = (e: any) => {
 <style lang="scss" scoped>
 @import "src/assets/scss/variables";
 
-.ui-checkbox {
+.ui-radio {
   input {
     position: absolute;
     top: 0;
@@ -63,13 +63,16 @@ const onChange = (e: any) => {
     width: 18px;
     height: 18px;
     margin-right: 10px;
-    border-radius: $border-radius-checkbox;
+    border-radius: 50%;
     background: $color-checkbox-bg;
     color: $color-text-white;
     cursor: pointer;
     transition: $transition-default;
 
     svg {
+      width: 7px;
+      height: 6px;
+      margin-top: 1px;
       transition: $transition-default;
       transform: scale(0);
     }

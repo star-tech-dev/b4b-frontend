@@ -9,11 +9,26 @@ export default {
     not_selected: 'Выбрать'
   },
 
+  sorting: {
+    default: 'По умолчанию',
+    likes: 'По лайкам',
+    date: 'По дате',
+    random: 'Случайно'
+  },
+
+  filters: {
+    role: 'Роль',
+    subroles: 'Саброли',
+    cleaners: 'Чистильщики',
+    sorting: 'Сортировка'
+  },
+
   game: {
     roles: {
       battle: 'Атакующая',
-      explore: 'Исследование/скорость',
-      support: 'Поддержка'
+      explore: 'Ловкость',
+      support: 'Поддержка',
+      any: 'Любая'
     },
 
     subroles: {
@@ -23,7 +38,8 @@ export default {
       shooter: 'Стрелок',
       damage: 'Высокий урон',
       engineer: 'Инженер',
-      generalist: 'Универсал'
+      generalist: 'Универсал',
+      any: 'Любая'
     },
 
     difficulty: {
@@ -50,11 +66,13 @@ export default {
     doc: 'Док',
     hoffman: 'Хоффман',
     jim: 'Джим',
-    karlee: 'Карли'
+    karlee: 'Карли',
+    any: 'Любой'
   },
 
   pages: {
     strategy: {
+      page_title: 'Стратегии',
       strategy_name: 'Название',
       clear: 'Очистить',
       save: 'Сохранить',

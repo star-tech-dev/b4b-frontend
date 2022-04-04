@@ -8,9 +8,9 @@ import UIButton from '@/components/ui/UIButton.vue'
 import UIDropdown from '@/components/ui/UIDropdown.vue'
 import BuffDebuffCharts from '@/components/strategy/BuffDebuffCharts.vue'
 import CardPicker from '@/components/cards/CardPicker.vue'
-import IconTrash from '@/components/icons/IconTrash.vue'
-import IconBookmark from '@/components/icons/IconBookmark.vue'
-import IconCheckRound from '@/components/icons/IconCheckRound.vue'
+import IconTrash from '@/components/icons/TrashIcon.vue'
+import IconBookmark from '@/components/icons/BookmarkIcon.vue'
+import IconCheckRound from '@/components/icons/CheckRoundIcon.vue'
 
 const { t } = useI18n()
 const state = reactive({

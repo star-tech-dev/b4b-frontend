@@ -69,6 +69,12 @@
   user-select: none;
 }
 
+.text {
+  &-dark {
+    color: $color-text-dark;
+  }
+}
+
 .buttons {
   & > * {
     &:not(:last-child) {

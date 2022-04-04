@@ -1,10 +1,11 @@
 import { Strategy } from '@/models/strategy'
+import { randomBool, randomNumber } from '@/helpers/random'
 
 export const strategy = () => new Strategy({
   id: '123123',
   name: 'Name',
-  likes: 250,
-  liked: false,
+  likes: randomNumber(0, 999),
+  liked: randomBool(),
   author: 'author_id',
   roles: ['battle', 'explore'],
   subroles: ['tank', 'damage', 'engineer'],

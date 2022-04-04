@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import StrategyItem from '@/components/strategy/StrategyItem.vue'
-import { default as strategyMock } from '@/mock/strategies'
+import { strategy as mockData } from '@/mock/strategies'
 
 import UIButton from '@/components/ui/UIButton.vue'
 import sliderImage from '@/assets/img/slider_1.png'
@@ -37,9 +37,9 @@ const { t } = useI18n()
 
         <div class="flex column center">
           <div class="top-strategy-list">
-            <StrategyItem :data="strategyMock" />
-            <StrategyItem :data="strategyMock" />
-            <StrategyItem :data="strategyMock" />
+            <StrategyItem :data="mockData()" />
+            <StrategyItem :data="mockData()" />
+            <StrategyItem :data="mockData()" />
           </div>
 
           <div>

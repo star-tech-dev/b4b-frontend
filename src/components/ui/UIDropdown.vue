@@ -5,6 +5,7 @@ import vClickOutside from '@/directives/v-click-outside'
 
 import IconAngle from '@/components/icons/AngleIcon.vue'
 import UICheckbox from '@/components/ui/UICheckbox.vue'
+import UIRadio from '@/components/ui/UIRadio.vue'
 
 interface Props {
   modelValue?: any,
@@ -73,16 +74,21 @@ const close = () => {
 }
 
 const onValueChange = (e: any) => {
+  console.log('onValueChange', e)
   if (props.multiple) {
+    console.log('e.target.checked', e.target.checked)
+    console.log('e.target.value', e.target.value)
     state.valueState[e.target.value] = e.target.checked
+    console.log('state.valueState', state.valueState)
     const newValue = Object.keys(state.valueState).reduce<any[]>((prevArr, key) => {
       return state.valueState[key] ? [...prevArr, key] : prevArr
     }, [])
+    console.log('newValue', newValue)
     emit('update:modelValue', newValue)
   } else {
     emit('update:modelValue', e.target.value)
     state.localValue = e.target.value
-    close()
+    // close()
   }
 }
 </script>
@@ -104,17 +110,28 @@ const onValueChange = (e: any) => {
     <div v-if="state.show" class="options">
       <div v-for="value in state.localValues" :key="value">
         <template v-if="props.multiple">
-<!--          <UICheckbox hidden @change="onValueChange">{{ value }}</UICheckbox>-->
-          <label>
-            <input type="checkbox" :name="state.groupName" :value="value.value" :checked="state.valueState[value.value]" @change="onValueChange">
-            <span>{{ value.label }}</span>
-          </label>
+          <UICheckbox
+              :name="state.groupName"
+              :value="value.value"
+              :checked="state.valueState[value.value]"
+              @change="onValueChange"
+          >
+            {{ value.label }}
+          </UICheckbox>
         </template>
         <template v-else>
-          <label>
-            <input type="radio" :name="state.groupName" :value="value.value" :checked="props.modelValue === value.value" @change="onValueChange">
-            <span>{{ value.label }}</span>
-          </label>
+          <UIRadio
+              :name="state.groupName"
+              :value="value.value"
+              :checked="props.modelValue === value.value"
+              @change="onValueChange"
+          >
+            {{ value.label }}
+          </UIRadio>
+<!--          <label>-->
+<!--            <input type="radio" :name="state.groupName" :value="value.value" :checked="props.modelValue === value.value" @change="onValueChange">-->
+<!--            <span>{{ value.label }}</span>-->
+<!--          </label>-->
         </template>
       </div>
     </div>

@@ -24,6 +24,7 @@ const onLogin = () => {
       </div>
 
       <nav class="flex a-center">
+        <RouterLink class="active" to="/strategies/add">Add strategy</RouterLink>
         <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
         <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
         <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>

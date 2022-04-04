@@ -5,15 +5,30 @@ export default {
     cleaners: 'Cleaners',
     difficulty: 'Game difficulty',
 
-    selected: 'Selected',
+    selected: 'selected',
     not_selected: 'Select'
+  },
+
+  sorting: {
+    default: 'Most popular',
+    likes: 'Likes amount',
+    date: 'Publish date',
+    random: 'Randomize'
+  },
+
+  filters: {
+    role: 'Role',
+    subroles: 'Subroles',
+    cleaners: 'Cleaners',
+    sorting: 'Sort by'
   },
 
   game: {
     roles: {
       battle: 'Battle',
       explore: 'Explore/run',
-      support: 'Support'
+      support: 'Support',
+      any: 'Any'
     },
 
     subroles: {
@@ -23,14 +38,15 @@ export default {
       shooter: 'Shooter',
       damage: 'High damage',
       engineer: 'Engineer',
-      generalist: 'Generalist'
+      generalist: 'Generalist',
+      any: 'Any'
     },
 
     difficulty: {
       recruit: 'Recruit',
       veteran: 'Veteran',
       nightmare: 'Nightmare',
-      any: 'Anyone'
+      any: 'Any'
     },
 
     weapon: {
@@ -38,7 +54,7 @@ export default {
       ar: 'Assault rifles',
       smg: 'SMG / Pistols',
       shotgun: 'Shotguns',
-      any: 'Anyone'
+      any: 'Any'
     }
   },
 
@@ -50,11 +66,13 @@ export default {
     doc: 'Doc',
     hoffman: 'Hoffman',
     jim: 'Jim',
-    karlee: 'Karlee'
+    karlee: 'Karlee',
+    any: 'Anyone'
   },
 
   pages: {
     strategy: {
+      page_title: 'Strategies',
       strategy_name: 'Title',
       clear: 'Clear form',
       save: 'Save the strategy',
