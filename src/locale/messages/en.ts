@@ -37,7 +37,8 @@ export default {
       sr: 'Sniper rifles',
       ar: 'Assault rifles',
       smg: 'SMG / Pistols',
-      shotgun: 'Shotguns'
+      shotgun: 'Shotguns',
+      any: 'Anyone'
     }
   },
 
@@ -61,7 +62,10 @@ export default {
       recommended_weapon: 'Recommended weapon',
       unwanted_weapon: 'Unwanted weapon',
       weapon_strategy: 'Weapon strategy',
-      selected_cards: 'Selected cards'
+      selected_cards: 'Selected cards',
+      all_cards: 'All cards',
+      page: 'Page',
+      from: 'from'
     }
   }
 }

@@ -48,6 +48,12 @@ const weaponValues = () => config.weaponAmmos.map(value => ({
   label: t(`game.weapon.${value}`),
   value
 }))
+const recommendedWeaponValues = () => {
+  return [...weaponValues(), {
+    label: t('game.weapon.any'),
+    value: 'any'
+  }]
+}
 
 const clear = () => {
   console.log('clear')
@@ -133,8 +139,8 @@ const save = () => {
         <h3>{{ t('pages.strategy.weapon_strategy') }}</h3>
         <div class="weapon-dropdowns flex a-center">
           <UIDropdown
-              v-model="state.weapon.wanted"
-              :values="weaponValues()"
+              v-model="state.weapon.recommended"
+              :values="recommendedWeaponValues()"
               multiple
           >
             {{ t('pages.strategy.recommended_weapon') }}
@@ -148,9 +154,9 @@ const save = () => {
           </UIDropdown>
         </div>
       </section>
-
-      <CardPicker />
     </div>
+
+    <CardPicker />
   </div>
 </template>
 

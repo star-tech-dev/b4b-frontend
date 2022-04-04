@@ -37,7 +37,8 @@ export default {
       sr: 'Снайперские винтовки',
       ar: 'Штурмовые винтовки',
       smg: 'Автоматы и пистолеты',
-      shotgun: 'Дробовики'
+      shotgun: 'Дробовики',
+      any: 'Любое'
     }
   },
 
@@ -61,7 +62,10 @@ export default {
       recommended_weapon: 'Рекомендованное оружие',
       unwanted_weapon: 'Нежелательное оружие',
       weapon_strategy: 'Стратегия по оружию',
-      selected_cards: 'Выбранные карты'
+      selected_cards: 'Выбранные карты',
+      all_cards: 'Все карты',
+      page: 'Страница',
+      from: 'из'
     }
   }
 }
