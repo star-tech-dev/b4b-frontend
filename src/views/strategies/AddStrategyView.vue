@@ -6,6 +6,7 @@ import config from '@/config'
 import BreadCrumbs from '@/components/BreadCrumbs.vue'
 import UIButton from '@/components/ui/UIButton.vue'
 import UIDropdown from '@/components/ui/UIDropdown.vue'
+import BuffDebuffCharts from '@/components/strategy/BuffDebuffCharts.vue'
 import CardPicker from '@/components/cards/CardPicker.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconBookmark from '@/components/icons/IconBookmark.vue'
@@ -126,12 +127,8 @@ const save = () => {
           </div>
         </div>
 
-        <div class="block -chart flex center grow">
-          <pre>
-            <code>
-              {{ state }}
-            </code>
-          </pre>
+        <div class="block -chart grow">
+          <BuffDebuffCharts />
         </div>
       </section>
 

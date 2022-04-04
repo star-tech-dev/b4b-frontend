@@ -3,9 +3,10 @@ import type { StrategyProps } from '@/models/strategy'
 import { reactive, withDefaults } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Strategy } from '@/models/strategy'
+import { chartData as tempData } from '@/mock/chart'
 
 import Liker from '@/components/LikerComponent.vue'
-import SimpleChart from '@/components/chart/SimpleChart.vue'
+import ChartSimple from '@/components/chart/ChartSimple.vue'
 
 interface Props {
   data?: StrategyProps
@@ -44,7 +45,7 @@ const onDislike = (value: number) => {
     </div>
 
     <div class="section -chart">
-      <SimpleChart />
+      <ChartSimple :data="tempData" />
     </div>
 
     <div class="section">

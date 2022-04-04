@@ -191,6 +191,7 @@ const onValueChange = (e: any) => {
     border-radius: 0 0 $border-radius-dropdown $border-radius-dropdown;
     border-top: 1px solid $color-bg-dark;
     box-shadow: $box-shadow-dropdown;
+    user-select: none;
   }
 
   &.-opened {
