@@ -1,91 +1,101 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import UICheckbox from '@/components/ui/UICheckbox.vue'
 import UIRadio from '@/components/ui/UIRadio.vue'
-import { useI18n } from 'vue-i18n'
 
 interface Props {
   modelValue: any,
-  values?: any[],
-  content: 'heading' | 'options',
-  align?: 'left' | 'right',
+  values: any[],
   multiple?: boolean,
-  localePrefix?: string
+  showValues?: boolean,
+  emptyText?: string
 }
 
 const { t } = useI18n()
-const radioName = Math.random().toFixed(10).slice(2)
-const emit = defineEmits(['update:modelValue', 'change'])
 const props = withDefaults(defineProps<Props>(), {
-  align: 'left',
-  multiple: false
+  multiple: false,
+  showValues: true
 })
+const emit = defineEmits(['update:modelValue', 'toggle'])
+const localValue = ref(props.modelValue)
+const parent = ref(null)
 
 const selectedText = computed(() => {
   if (!props.modelValue || !props.modelValue.length) {
-    return t(`${props.localePrefix}.any`)
+    return props.emptyText || t('globals.any')
   }
+
   if (props.multiple) {
     if (props.modelValue.length > 1) {
       return `${props.modelValue.length} ${t('globals.selected')}`
     }
-    return props.modelValue.map((i:any) => t(`${props.localePrefix}.${i}`)).join(', ')
+    const labels = props.modelValue.map((i: any) => props.values.find(j => j.value === i).label)
+    return labels.join(', ')
   }
-  return t(`${props.localePrefix}.${props.modelValue}`)
+
+  return props.values.find(i => i.value === props.modelValue).label
 })
 
 const onChange = (e: any) => {
   if (props.multiple) {
-    console.log('props.modelValue', props.modelValue)
-    let newValue
-    if (e.target.checked) {
-      newValue = props.modelValue ? [...props.modelValue, e.target.value] : props.modelValue
-    } else {
-      props.modelValue.filter((i: any) => i !== e.target.value)
-    }
-    emit('update:modelValue', newValue)
+    const value = e.target.checked
+        ? [...props.modelValue, e.target.value]
+        : props.modelValue.filter((i: any) => i !== e.target.value)
+    emit('update:modelValue', value)
   } else {
     emit('update:modelValue', e.target.value)
   }
 }
+
+onMounted(() => {
+  const allHiddenValues = (parent.value as any).querySelector('.all-hidden-values')
+  const selectedTextRef = (parent.value as any).querySelector('.selected-text')
+  if (allHiddenValues && selectedTextRef) {
+    const theWidestOptionWidth = (allHiddenValues as any).offsetWidth;
+    (selectedTextRef as any).style.minWidth = `${theWidestOptionWidth}px`
+  }
+})
 </script>
 
 <template>
-  <div :class="`filter-item -align-${props.align}`">
-    <template v-if="props.content === 'heading'">
-      <div class="item-heading flex a-center">
-        <strong>
-          <slot/>
-        </strong>
-        <span>:&nbsp;</span>
-        <div class="value">{{ selectedText }}</div>
+  <div :class="`filter-item ${props.showValues ? '-opened' : ''}`" ref="parent">
+    <div class="heading flex a-center" @click="emit('toggle')">
+      <strong>
+        <slot/>
+      </strong>
+      <span>: &nbsp;</span>
+      <span class="selected-text">{{ selectedText }}</span>
+      <div class="all-hidden-values flex column" ref="allHiddenValues">
+        <span v-for="value in props.values" :key="value.value">{{ value.label }}</span>
       </div>
-    </template>
+    </div>
 
-    <template v-if="props.content === 'options'">
-      <div class="item-options flex a-start">
-        <div class="options">
-          <div v-for="option in props.values" :key="option.value">
-            <template v-if="props.multiple === true">
-              <UICheckbox
-                  :value="option.value"
-                  :checked="props.modelValue?.includes(option.value)"
-                  @change="onChange"
-              >
-                {{ option.label }}
-              </UICheckbox>
-            </template>
-            <template v-else>
-              <UIRadio
-                  :name="radioName"
-                  :value="option.value"
-                  :checked="props.modelValue === option.value"
-                  @change="onChange"
-              >
-                {{ option.label }}
-              </UIRadio>
-            </template>
-          </div>
+    <template v-if="props.showValues">
+      <div class="options">
+        <div v-for="value in props.values" :key="value">
+          <template v-if="props.multiple">
+            <UICheckbox
+                v-model="localValue"
+                :value="value.value"
+                :checked="props.modelValue.includes(value.value)"
+                @change="onChange"
+            >
+              {{ value.label }}
+            </UICheckbox>
+          </template>
+
+          <template v-else>
+            <UIRadio
+                v-model="localValue"
+                :value="value.value"
+                :checked="props.modelValue === value.value"
+                @change="onChange"
+            >
+              {{ value.label }}
+            </UIRadio>
+          </template>
         </div>
       </div>
     </template>
@@ -96,63 +106,45 @@ const onChange = (e: any) => {
 @import "src/assets/scss/variables";
 
 .filter-item {
+  flex-shrink: 1;
+  flex-grow: 0;
+  min-width: 180px;
+
+  .heading {
+    padding: 30px 30px;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: $transition-default;
+    border-color: $color-bg;
+  }
+
   strong {
     font-weight: $font-weight-semibold;
-    white-space: nowrap;
+    transition: $transition-default;
   }
 
-  .invisible {
+  .options {
+    padding: 20px 30px 30px;
+  }
+
+  .all-hidden-values {
+    position: absolute;
+    z-index: -1;
+    height: 0;
     opacity: 0;
     visibility: hidden;
-  }
-
-  .value {
-    white-space: nowrap;
-    text-overflow: ellipsis;
     overflow: hidden;
-    color: $color-text-regular;
   }
 
-  &.-align {
-    &-left {
-      text-align: left;
-    }
-    &-right {
-      text-align: right;
+  &.-opened {
+    .heading {
+      border-bottom: 1px solid $color-bg;
 
-      .item-heading {
-        justify-content: flex-end;
-      }
-
-      .item-options {
-        justify-content: flex-end;
-      }
-
-      .options {
-        & > .ui-radio .inline-flex,
-        & > .ui-checkbox .inline-flex {
-          flex-direction: row-reverse;
-        }
-      }
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-.filter-item {
-  &.-align {
-    &-right {
-      .options {
-        .ui-radio .inline-flex,
-        .ui-checkbox .inline-flex {
-          flex-direction: row-reverse;
-
-          .box {
-            margin-right: 0;
-            margin-left: 10px;
-          }
-        }
+      strong {
+        color: $color-text-white;
       }
     }
   }

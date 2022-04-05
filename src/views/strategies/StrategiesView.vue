@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Strategy } from '@/models/strategy'
+import type { FilterBarState } from '@/components/filter/FilterBar.vue'
 import { onMounted, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { strategy as mockData } from '@/mock/strategies'
@@ -9,21 +10,12 @@ import StrategyItem from '@/components/strategy/StrategyItem.vue'
 
 const { t } = useI18n()
 const state = reactive({
-  filterBarData: {
-    filters: {
-      role: '',
-      subroles: [],
-      cleaners: []
-    },
-    sorting: {
-      type: 'default'
-    }
-  },
   list: [] as Strategy[]
 })
 
-const onFilterChange = (data: any) => {
-  console.log('onFilterChange', data)
+const onFilterChange = (data: FilterBarState) => {
+  console.log('on the page:', data)
+  // filterBarData
 }
 
 onMounted(() => {
@@ -39,13 +31,11 @@ onMounted(() => {
         <span class="text-dark"> - всего {{ state.list.length }}</span>
       </h1>
 
-      <div>
-        <pre>
-          {{ state.filterBarData }}
-        </pre>
-      </div>
-
-      <FilterBar v-model="state.filterBarData" @change="onFilterChange"/>
+      <FilterBar
+          :filters="['role', 'subroles', 'cleaners']"
+          :sorting="true"
+          @change="onFilterChange"
+      />
 
       <section class="list">
         <template v-if="state.list.length">

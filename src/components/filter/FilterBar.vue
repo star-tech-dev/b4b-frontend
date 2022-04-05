@@ -1,171 +1,140 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import type { CleanerID, GameRole, GameSubrole } from '../../../env'
+import { reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { gameRoles, gameSubroles, cleaners } from '@/config'
+import { gameRoles, cleaners, gameSubroles } from '@/config'
 
 import FilterItem from './FilterItem.vue'
 
-interface Filter {
-  name: string,
-  model: string,
-  values: {
-    label: string,
-    value: any
-  }[],
-  localePrefix?: string
-  multiple?: boolean
+type SortingType = 'default' | 'likes' | 'date' | 'random'
+type FilterName = 'role' | 'subroles' | 'cleaners'
+
+interface Sorting {
+  type: SortingType
+}
+
+export interface FilterBarState {
+  role: GameRole | 'any',
+  subroles: GameSubrole[],
+  cleaners: CleanerID[],
+  sorting: Sorting
 }
 
 interface Props {
-  modelValue?: any
+  filters?: FilterName[],
+  sorting?: boolean
 }
 
 const { t } = useI18n()
 const emit = defineEmits(['change'])
-const props = withDefaults(defineProps<Props>(), {})
-const state = reactive({
-  filters: {
-    role: '',
-    subroles: [],
-    cleaners: []
-  },
+const props = withDefaults(defineProps<Props>(), {
+  filters: () => ['role', 'subroles', 'cleaners'],
+  sorting: true
+})
+const state = reactive<FilterBarState>({
+  role: 'any',
+  subroles: [],
+  cleaners: [],
+
   sorting: {
     type: 'default'
-  },
-  opened: false
-})
-
-const filters = [
-  {
-    name: t('filters.role'),
-    model: 'role',
-    values: [
-      ...gameRoles.map(i => ({ label: t(`game.roles.${i}`), value: i })),
-      {
-        label: t('game.roles.any'),
-        value: 'any'
-      }
-    ],
-    localePrefix: 'game.roles'
-  },
-  {
-    name: t('filters.subroles'),
-    model: 'subroles',
-    values: gameSubroles.map(i => ({ label: t(`game.subroles.${i}`), value: i })),
-    multiple: true,
-    localePrefix: 'game.subroles'
-    
-  },
-  {
-    name: t('filters.cleaners'),
-    model: 'cleaners',
-    values: cleaners.map(i => ({ label: t(`cleaners.${i}`), value: i })),
-    multiple: true,
-    localePrefix: 'cleaners'
   }
-] as Filter[]
+})
+const sortingTypes: SortingType[] = ['default', 'likes', 'date', 'random']
+const isOpened = ref(false)
 
-const sotring = {
-  name: t('filters.sorting'),
-  model: 'sorting',
-  values: [
-    { label: t('sorting.default'), value: 'default' },
-    { label: t('sorting.likes'), value: 'likes' },
-    { label: t('sorting.random'), value: 'random' },
-    { label: t('sorting.date'), value: 'date' }
-  ],
-  localePrefix: 'sorting'
-} as Filter
+const roleValues = () => [
+  ...gameRoles.map(i => ({ label: t(`game.roles.${i}`), value: i })),
+  { label: t('game.roles.any'), value: 'any' }
+]
+const subroleValues = () => gameSubroles.map(i => ({ label: t(`game.subroles.${i}`), value: i }))
+const cleanerValues = () => cleaners.map(i => ({ label: t(`cleaners.${i}`), value: i }))
+const sortingValues = () => sortingTypes.map(i => ({ label: t(`sorting.${i}`), value: i }))
 
 const toggle = () => {
-  state.opened = !state.opened
+  isOpened.value = !isOpened.value
 }
 
 const close = () => {
-  state.opened = false
+  isOpened.value = false
+}
+
+const tryToOpen = () => {
+  console.log('e', isOpened.value)
+  if (!isOpened.value) {
+    toggle()
+  }
 }
 
 const reset = () => {
-  state.filters.role = 'battle'
-  state.filters.subroles = []
-  state.filters.cleaners = []
+  state.role = 'any'
+  state.subroles = []
+  state.cleaners = []
   state.sorting.type = 'default'
-  emit('change', { filters: state.filters, sorting: state.sorting })
   close()
 }
 
-const onChange = () => {
-  emit('change', { filters: state.filters, sorting: state.sorting })
-  // const newValue = props.modelValue
-  // console.log('newValue', newValue, newValue.filters)
-  // emit('update:modelValue', props.modelValue)
-}
+watch(state, () => {
+  console.log('state', state)
+  emit('change', state)
+})
 </script>
 
 <template>
-  <div :class="`filter-bar ${state.opened ? '-opened' : ''}`">
-    <!--  Heading  -->
-    <div class="heading flex a-center j-between" @click="toggle">
-      <div class="filter-list flex a-center">
-        <FilterItem
-            v-for="filter in filters"
-            v-model="state[filter.model]"
-            :multiple="filter.multiple"
-            :key="filter.name"
-            content="heading"
-            :locale-prefix="filter.localePrefix"
-            @change="onChange"
-        >
-          <span>{{ filter.name }}</span>
-        </FilterItem>
+  <div :class="`filter-bar ${isOpened ? '-opened' : ''}`" @click.self="tryToOpen">
+    <div class="flex a-start j-between" @click.self="tryToOpen">
+      <div class="list flex a-start" @click.self="tryToOpen">
+        <template v-if="props.filters.includes('role')">
+          <FilterItem
+              v-model="state.role"
+              :values="roleValues()"
+              :showValues="isOpened"
+              @toggle="toggle"
+          >
+            {{ t('filters.role') }}
+          </FilterItem>
+        </template>
+
+        <template v-if="props.filters.includes('subroles')">
+          <FilterItem
+              v-model="state.subroles"
+              :values="subroleValues()"
+              :showValues="isOpened"
+              :multiple="true"
+              @toggle="toggle"
+          >
+            {{ t('filters.subroles') }}
+          </FilterItem>
+        </template>
+
+        <template v-if="props.filters.includes('cleaners')">
+          <FilterItem
+              v-model="state.cleaners"
+              :values="cleanerValues()"
+              :showValues="isOpened"
+              :multiple="true"
+              @toggle="toggle"
+          >
+            {{ t('filters.cleaners') }}
+          </FilterItem>
+        </template>
       </div>
 
-      <div class="filter-list">
-        <FilterItem
-            v-model="state[sotring.model]"
-            :values="sotring.values"
-            content="heading"
-            align="right"
-            :locale-prefix="sotring.localePrefix"
-            @change="onChange"
-        >
-          <span>{{ sotring.name }}</span>
-        </FilterItem>
+      <div class="flex a-start">
+        <template v-if="props.sorting">
+          <FilterItem
+              v-model="state.sorting.type"
+              :values="sortingValues()"
+              :showValues="isOpened"
+              @toggle="toggle"
+          >
+            {{ t('filters.sorting') }}
+          </FilterItem>
+        </template>
       </div>
     </div>
 
-    <!--  Options  -->
-    <template v-if="state.opened">
-      <div class="options flex a-start j-between">
-        <div>
-          <div class="filter-list flex a-start">
-            <FilterItem
-                v-for="filter in filters"
-                v-model="state[filter.model]"
-                :multiple="filter.multiple"
-                :values="filter.values"
-                :key="filter.name"
-                content="options"
-                @change="onChange"
-            >
-              <span>{{ filter.name }}</span>
-            </FilterItem>
-          </div>
-        </div>
-
-        <div class="filter-list">
-          <FilterItem
-              v-model="state[sotring.model]"
-              :values="sotring.values"
-              content="options"
-              align="right"
-              @change="onChange"
-          >
-            <span>{{ sotring.name }}</span>
-          </FilterItem>
-        </div>
-      </div>
-
+    <template v-if="isOpened">
       <div class="actions">
         <a href="#" @click.prevent="close">Свернуть панель</a>
         <a href="#" class="secondary" @click.prevent="reset">Сбросить все фильтры</a>
@@ -178,37 +147,23 @@ const onChange = () => {
 @import "src/assets/scss/variables";
 
 .filter-bar {
-  margin: 40px auto 20px;
+  margin: 30px auto 20px;
   border-radius: $border-radius-default;
+  color: $color-text-regular;
   transition: $transition-default;
 
-  .heading {
-    padding: 30px;
-    cursor: pointer;
-    border-radius: $border-radius-default;
-    transition: $transition-default;
-
-    &:hover {
-      background: darken($color-bg-light, 1.2%);
-      color: $color-text-white;
-    }
-  }
-
-  .options {
-    padding: 30px 30px;
-    border-top: 1px solid $color-bg;
+  .list {
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .actions {
-    padding: 10px 30px 30px;
+    padding: 30px;
+    font-size: 15px;
+    font-weight: $font-weight-medium;
 
     .secondary {
       color: $color-text-dark;
-      opacity: .5;
-
-      &:hover {
-        opacity: 1;
-      }
     }
 
     & > * {
@@ -218,19 +173,24 @@ const onChange = () => {
     }
   }
 
-  .filter-list {
-    & > * {
-      width: 220px;
-    }
-  }
-
   &.-opened {
     background: $color-bg-light;
-    color: $color-text-white;
+  }
 
-    .heading {
-      &:hover {
-        background: $color-bg-light;
+  &:not(.-opened) {
+    &:hover {
+      background: $color-bg-light;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.filter-bar {
+  .list {
+    & > * {
+      .heading {
+        padding-right: 40px;
       }
     }
   }

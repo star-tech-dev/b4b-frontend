@@ -6,7 +6,8 @@ export default {
     difficulty: 'Сложность игры',
 
     selected: 'выбрано',
-    not_selected: 'Выбрать'
+    not_selected: 'Выбрать',
+    any: 'Все'
   },
 
   sorting: {

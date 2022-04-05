@@ -6,7 +6,8 @@ export default {
     difficulty: 'Game difficulty',
 
     selected: 'selected',
-    not_selected: 'Select'
+    not_selected: 'Select',
+    any: 'Any'
   },
 
   sorting: {
