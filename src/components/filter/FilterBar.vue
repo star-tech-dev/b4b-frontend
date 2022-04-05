@@ -174,6 +174,7 @@ watch(state, () => {
   }
 
   &.-opened {
+    margin-bottom: 80px;
     background: $color-bg-light;
   }
 
