@@ -71,44 +71,46 @@ const save = () => {
       <BreadCrumbs/>
 
       <section class="flex">
-        <div class="block -primary">
-          <div class="title">
-            <input :placeholder="t('pages.strategy.strategy_name')" autofocus/>
-          </div>
+        <div class="block -primary flex column j-between">
+          <div>
+            <div class="title">
+              <input :placeholder="t('pages.strategy.strategy_name')" autofocus/>
+            </div>
 
-          <div class="dropdowns">
-            <UIDropdown
-                v-model="state.role"
-                :values="roleValues()"
-                theme="dark"
-            >
-              {{ t('globals.role') }}
-            </UIDropdown>
-            <UIDropdown
-                v-model="state.subroles"
-                :values="subroleValues()"
-                theme="dark"
-                :disabled="!state.role"
-                multiple
-            >
-              {{ t('globals.subroles') }}
-            </UIDropdown>
-            <UIDropdown
-                v-model="state.cleaners"
-                :values="cleanerValues()"
-                theme="dark"
-                multiple
-            >
-              {{ t('globals.cleaners') }}
-            </UIDropdown>
-            <UIDropdown
-                v-model="state.difficulty"
-                :values="difficultyValues()"
-                theme="dark"
-                multiple
-            >
-              {{ t('globals.difficulty') }}
-            </UIDropdown>
+            <div class="dropdowns">
+              <UIDropdown
+                  v-model="state.role"
+                  :values="roleValues()"
+                  theme="dark"
+              >
+                {{ t('globals.role') }}
+              </UIDropdown>
+              <UIDropdown
+                  v-model="state.subroles"
+                  :values="subroleValues()"
+                  theme="dark"
+                  :disabled="!state.role"
+                  multiple
+              >
+                {{ t('globals.subroles') }}
+              </UIDropdown>
+              <UIDropdown
+                  v-model="state.cleaners"
+                  :values="cleanerValues()"
+                  theme="dark"
+                  multiple
+              >
+                {{ t('globals.cleaners') }}
+              </UIDropdown>
+              <UIDropdown
+                  v-model="state.difficulty"
+                  :values="difficultyValues()"
+                  theme="dark"
+                  multiple
+              >
+                {{ t('globals.difficulty') }}
+              </UIDropdown>
+            </div>
           </div>
 
           <div class="actions">
@@ -157,74 +159,9 @@ const save = () => {
   </div>
 </template>
 
+<style src="./_strategies.scss" lang="scss" scoped></style>
 <style lang="scss" scoped>
-@import "src/assets/scss/extends";
-
 .page.-add-strategy {
-  section {
-    margin: 60px auto;
-
-    & > h3 {
-      margin-bottom: 20px;
-    }
-  }
-
-  .block {
-    @extend %dark-block;
-
-    &.-primary {
-      width: 320px;
-
-      .title {
-        padding: 22px 40px 10px;
-
-        input {
-          background: transparent;
-          border: none;
-          padding: 10px 0 10px;
-          font-family: $font-family-default;
-          font-size: 22px;
-          line-height: 26px;
-          font-weight: $font-weight-bold;
-          color: $color-text-white;
-          outline: none;
-        }
-      }
-
-      .dropdowns {
-        padding: 0 14px;
-
-        & > * {
-          &:not(:last-child) {
-            margin-bottom: 10px;
-          }
-        }
-      }
-
-      .actions {
-        padding: 20px 16px;
-
-        & > * {
-          padding: 16px 24px;
-          justify-content: flex-start;
-          border-radius: $border-radius-dropdown;
-        }
-      }
-    }
-
-    &.-chart {
-      margin-left: 40px;
-    }
-  }
-
-  .weapon-dropdowns {
-    & > * {
-      width: 300px;
-
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
-    }
-  }
+  //
 }
 </style>

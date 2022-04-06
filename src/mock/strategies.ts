@@ -3,7 +3,7 @@ import { randomBool, randomNumber } from '@/helpers/random'
 
 export const strategy = () => new Strategy({
   id: '123123',
-  name: 'Name',
+  name: 'Strategy name',
   likes: randomNumber(0, 999),
   liked: randomBool(),
   author: 'author_id',

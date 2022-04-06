@@ -7,7 +7,11 @@ export default {
 
     selected: 'выбрано',
     not_selected: 'Выбрать',
-    any: 'Все'
+    any: 'Все',
+
+    to_favorites: 'В избранное',
+    like: 'Лайкнуть',
+    liked: 'Уже лайкнул'
   },
 
   sorting: {

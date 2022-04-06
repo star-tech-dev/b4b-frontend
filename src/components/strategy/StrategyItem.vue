@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { Strategy } from '@/models/strategy'
 import { randomData as tempData } from '@/mock/chart'
 
-import Liker from '@/components/LikerComponent.vue'
+import Liker from '@/components/like/LikerCompact.vue'
 import ChartSimple from '@/components/chart/ChartSimple.vue'
 
 interface Props {

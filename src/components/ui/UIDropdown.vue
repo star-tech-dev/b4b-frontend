@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import vClickOutside from '@/directives/v-click-outside'
 
@@ -9,9 +9,12 @@ import UIRadio from '@/components/ui/UIRadio.vue'
 
 interface Props {
   modelValue?: any,
+  value?: any,
+
   values?: any[],
   multiple?: boolean,
   disabled?: boolean,
+  readonly?: boolean,
   theme?: 'default' | 'dark'
 }
 
@@ -21,6 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   values: () => [],
   multiple: false,
+  readonly: false,
   theme: 'default'
 })
 
@@ -39,7 +43,7 @@ const state = reactive({
   groupName: Math.random().toFixed(10).slice(2)
 })
 
-const parentClassList = computed(() => `ui-dropdown -theme-${props.theme} ${state.show ? '-opened' : ''} ${props.disabled ? 'disabled' : ''}`)
+const parentClassList = computed(() => `ui-dropdown -theme-${props.theme} ${state.show ? '-opened' : ''} ${props.disabled ? 'disabled' : ''} ${props.readonly ? '-readonly' : ''}`)
 
 props.values.forEach(value => {
   props.multiple
@@ -48,10 +52,15 @@ props.values.forEach(value => {
 })
 
 const valueText = computed(() => {
+  if (props.value) {
+    return props.value
+  }
   if (!props.modelValue?.length) {
+    console.log('1')
     return t('globals.not_selected')
   }
   if (props.multiple) {
+    console.log('2')
     const normalizedValues = props.modelValue.map((i: any) => {
       const localValue = state.localValues.find(j => j.value === i)
       return localValue?.label || localValue?.value || localValue
@@ -61,11 +70,16 @@ const valueText = computed(() => {
     }
     return normalizedValues.join(', ')
   }
+  console.log('3')
   const localValue = state.localValues.find(j => j.value === props.modelValue)
   return localValue?.label || localValue?.value || localValue
 })
 
 const toggle = () => {
+  if (props.readonly) {
+    close()
+    return
+  }
   state.show = !state.show
 }
 
@@ -156,7 +170,6 @@ const onValueChange = (e: any) => {
     z-index: 1;
     padding: 14px 24px 16px;
     border-radius: $border-radius-dropdown;
-    cursor: pointer;
     transition: $transition-dropdown;
 
     .label {
@@ -185,15 +198,6 @@ const onValueChange = (e: any) => {
       transition: $transition-default;
       opacity: 0;
       visibility: hidden;
-    }
-
-    &:hover {
-      background: $color-bg;
-
-      .angle {
-        opacity: 1;
-        visibility: visible;
-      }
     }
   }
 
@@ -238,6 +242,29 @@ const onValueChange = (e: any) => {
 
     &-dark {
       //
+    }
+  }
+
+  &.-readonly {
+    //pointer-events: none;
+  }
+
+  &:not(.-readonly) {
+    .select {
+      cursor: pointer;
+    }
+  }
+
+  &:not(.-readonly):not(.-opened) {
+    .select {
+      &:hover {
+        background: $color-bg;
+
+        .angle {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
   }
 

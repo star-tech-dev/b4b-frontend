@@ -7,7 +7,11 @@ export default {
 
     selected: 'selected',
     not_selected: 'Select',
-    any: 'Any'
+    any: 'Any',
+
+    to_favorites: 'Add to favorites',
+    like: 'Like this',
+    liked: 'Already liked'
   },
 
   sorting: {
