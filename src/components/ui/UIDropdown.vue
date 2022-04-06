@@ -56,11 +56,9 @@ const valueText = computed(() => {
     return props.value
   }
   if (!props.modelValue?.length) {
-    console.log('1')
     return t('globals.not_selected')
   }
   if (props.multiple) {
-    console.log('2')
     const normalizedValues = props.modelValue.map((i: any) => {
       const localValue = state.localValues.find(j => j.value === i)
       return localValue?.label || localValue?.value || localValue
@@ -70,7 +68,6 @@ const valueText = computed(() => {
     }
     return normalizedValues.join(', ')
   }
-  console.log('3')
   const localValue = state.localValues.find(j => j.value === props.modelValue)
   return localValue?.label || localValue?.value || localValue
 })
@@ -88,16 +85,11 @@ const close = () => {
 }
 
 const onValueChange = (e: any) => {
-  console.log('onValueChange', e)
   if (props.multiple) {
-    console.log('e.target.checked', e.target.checked)
-    console.log('e.target.value', e.target.value)
     state.valueState[e.target.value] = e.target.checked
-    console.log('state.valueState', state.valueState)
     const newValue = Object.keys(state.valueState).reduce<any[]>((prevArr, key) => {
       return state.valueState[key] ? [...prevArr, key] : prevArr
     }, [])
-    console.log('newValue', newValue)
     emit('update:modelValue', newValue)
   } else {
     emit('update:modelValue', e.target.value)
