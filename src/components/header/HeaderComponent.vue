@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useStore } from 'vuex'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -6,9 +7,11 @@ import LocaleSwitcher from '@/components/locale/LocaleSwitcher.vue'
 import logoImage from '@/assets/img/logo.svg'
 
 const { t } = useI18n()
+const store = useStore()
 
 const onLogin = () => {
   console.log('onLogin')
+  store.dispatch('modals/open', 'auth')
 }
 </script>
 
@@ -24,7 +27,6 @@ const onLogin = () => {
       </div>
 
       <nav class="flex a-center">
-        <RouterLink class="active" to="/strategies/add">Add strategy</RouterLink>
         <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
         <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
         <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>
@@ -59,7 +61,7 @@ const onLogin = () => {
 </i18n>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/variables";
+@import "../../assets/scss/variables/index";
 
 header {
   padding: 20px 0;

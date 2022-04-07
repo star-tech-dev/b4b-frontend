@@ -1,6 +1,11 @@
+<script setup lang="ts">
+import ModalController from '@/components/modals/ModalController.vue'
+</script>
+
 <template>
   <div class="layout -simple">
     <slot />
+    <ModalController/>
   </div>
 </template>
 

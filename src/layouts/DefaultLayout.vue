@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import HeaderComponent from '@/components/HeaderComponent.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
+import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
+import ModalController from '@/components/modals/ModalController.vue'
 </script>
 
 <template>
   <div class="layout -default">
-    <HeaderComponent />
-
+    <HeaderComponent/>
     <main>
-      <slot />
+      <slot/>
     </main>
-
-    <FooterComponent />
+    <FooterComponent/>
+    <ModalController/>
   </div>
 </template>
 

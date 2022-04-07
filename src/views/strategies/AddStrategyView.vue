@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import config from '@/config'
 
-import BreadCrumbs from '@/components/BreadCrumbs.vue'
+import BreadCrumbs from '@/components/breadcrumbs/BreadCrumbs.vue'
 import UIButton from '@/components/ui/UIButton.vue'
 import UIDropdown from '@/components/ui/UIDropdown.vue'
 import BuffDebuffCharts from '@/components/strategy/BuffDebuffCharts.vue'

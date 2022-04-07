@@ -1,24 +1,13 @@
 import { createStore } from 'vuex'
 
 import auth from '@/store/modules/auth'
-import API from '@/api'
+import modals from '@/store/modules/modals'
 
-// Create a new store instance.
 const store = createStore({
-  state () {
-    return {}
-  },
-  actions: {
-    login: (context, payload) => {
-      return API.sendRequest({
-        method: 'post',
-        url: '/login',
-        data: payload
-      })
-    }
-  },
+  state: () => ({}),
+  actions: {},
   mutations: {},
-  modules: { auth }
+  modules: { auth, modals }
 })
 
 export default store
