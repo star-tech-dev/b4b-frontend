@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { card as mockCard } from '@/mock/card'
 
-import CardItem from '@/components/cards/CardItem.vue'
+import CardItem from '@/components/card/CardItem.vue'
 
 const cards = [mockCard()]
 </script>

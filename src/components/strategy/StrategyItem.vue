@@ -7,6 +7,7 @@ import { randomData as tempData } from '@/mock/chart'
 
 import Liker from '@/components/like/LikerCompact.vue'
 import ChartSimple from '@/components/chart/ChartSimple.vue'
+import CardItem from '@/components/card/CardItem.vue'
 
 interface Props {
   data?: StrategyProps
@@ -55,8 +56,10 @@ const onDislike = (value: number) => {
       </RouterLink>
     </div>
 
-    <div class="section">
-      <div>deck</div>
+    <div class="section -deck">
+      <div class="flex a-center j-start">
+        <CardItem v-for="card in props.data.deck" :data="card" size="small" :key="card.id"/>
+      </div>
     </div>
   </div>
 </template>
@@ -85,7 +88,7 @@ const onDislike = (value: number) => {
   .title {
     a {
       @extend %h3;
-      
+
       &:hover {
         text-decoration: none;
       }
@@ -132,6 +135,10 @@ const onDislike = (value: number) => {
         width: 100%;
         height: 100%;
       }
+    }
+
+    &.-deck {
+      overflow: hidden;
     }
   }
 }

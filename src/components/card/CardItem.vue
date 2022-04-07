@@ -107,6 +107,16 @@ const card = new Card(props.data)
     z-index: 0;
     width: 100%;
     height: 100%;
+    user-select: none;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .feature {

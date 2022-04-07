@@ -141,7 +141,7 @@ onMounted(() => {
 
   &.-opened {
     .heading {
-      border-bottom: 1px solid $color-bg;
+      //border-bottom: 1px solid $color-bg;
 
       strong {
         color: $color-text-white;

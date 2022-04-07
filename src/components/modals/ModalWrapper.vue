@@ -5,23 +5,24 @@ import { useStore } from 'vuex'
 import IconCross from '@/components/icons/CrossIcon.vue'
 
 interface Props {
-  id: boolean
+  id: string,
+  size: 'default' | 'wide' | 'narrow'
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  size: 'default'
+})
 const store = useStore()
 const slots = useSlots()
 
-console.log('slots', slots, slots.footer())
-
-const isShow = computed(() => store.getters['modals/isOpened'](props.id))
+const show = computed(() => store.getters['modals/isOpened'](props.id))
 
 const close = () => store.dispatch('modals/close', props.id)
 </script>
 
 <template>
   <div class="modal-wrapper">
-    <dialog v-if="isShow" class="modal" :open="isShow" :data-id="props.id">
+    <dialog v-if="show" :class="`modal -size-${props.size}`" :open="show" :data-id="props.id">
       <a class="close flex center" href="#" @click.prevent="close">
         <IconCross/>
       </a>
@@ -77,6 +78,13 @@ const close = () => store.dispatch('modals/close', props.id)
 
     .header {
       @extend %h3;
+      margin-bottom: 30px;
+    }
+
+    &.-size {
+      &-default {
+        width: 480px;
+      }
     }
   }
 }

@@ -33,7 +33,7 @@ const onClick = () => {
   width: 100vw;
   height: 100vh;
   background: rgba($color-bg-dark, .65);
-  padding: 40px 0 0;
+  padding: 40px 0 40px;
   overflow: auto;
 }
 </style>

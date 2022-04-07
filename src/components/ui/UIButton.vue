@@ -50,6 +50,7 @@ const buttonProps = tag === 'button'
   border-radius: $border-radius-button;
   cursor: pointer;
   transition: $transition-button;
+  outline: none;
 
   &:hover {
     text-decoration: none;

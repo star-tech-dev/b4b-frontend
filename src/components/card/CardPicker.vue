@@ -4,7 +4,7 @@ import { onMounted, reactive } from 'vue'
 import Swiper, { Navigation } from 'swiper'
 import { cards as mockCards } from '@/mock/card'
 
-import CardItem from '@/components/cards/CardItem.vue'
+import CardItem from '@/components/card/CardItem.vue'
 import IconAngleSlider from '@/components/icons/AngleSliderIcon.vue'
 
 import 'swiper/css'
