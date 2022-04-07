@@ -1,5 +1,6 @@
 import { Strategy } from '@/models/strategy'
 import { randomBool, randomNumber } from '@/helpers/random'
+import { deck } from '@/mock/card'
 
 export const strategy = () => new Strategy({
   id: '123123',
@@ -7,11 +8,12 @@ export const strategy = () => new Strategy({
   likes: randomNumber(0, 999),
   liked: randomBool(),
   author: 'author_id',
-  roles: ['battle', 'explore'],
-  subroles: ['tank', 'damage', 'engineer'],
+  roles: ['attack', 'agility'],
+  subroles: ['tank', 'damage', 'engineer', 'runner'],
   ammo: ['smg', 'free'],
   cleaners: ['doc', 'mom'],
-  difficulty: ['nightmare', 'any']
+  difficulty: ['nightmare', 'any'],
+  deck
 })
 
 export const strategies = [strategy(), strategy(), strategy()]

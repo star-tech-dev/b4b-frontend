@@ -16,7 +16,7 @@ export interface StrategyProps {
   ammo?: DeckAmmo[],
   cleaners?: CleanerID[]
   difficulty?: DeckDifficulty[],
-  cards?: Card[]
+  deck?: Card[]
 }
 
 export class Strategy {
@@ -28,7 +28,7 @@ export class Strategy {
   public ammo: DeckAmmo[]
   public cleaners: CleanerID[]
   public difficulty: DeckDifficulty[]
-  public cards: Card[]
+  public deck: Card[]
 
   public likes: number
   public liked: boolean
@@ -42,7 +42,7 @@ export class Strategy {
     this.ammo = props.ammo || []
     this.cleaners = props.cleaners || []
     this.difficulty = props.difficulty || []
-    this.cards = props.cards ? props.cards.map(i => new Card(i as CardProps)) : []
+    this.deck = props.deck ? props.deck.map(i => new Card(i as CardProps)) : []
 
     this.likes = props.likes || 0
     this.liked = props.liked || false

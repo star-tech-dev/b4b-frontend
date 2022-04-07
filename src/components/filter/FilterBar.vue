@@ -2,7 +2,7 @@
 import type { CleanerID, GameRole, GameSubrole } from '../../../env'
 import { reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { gameRoles, cleaners, gameSubroles } from '@/config'
+import { gameRoles, gameCleaners, gameSubroles } from '@/config'
 
 import FilterItem from './FilterItem.vue'
 
@@ -48,7 +48,7 @@ const roleValues = () => [
   { label: t('game.roles.any'), value: 'any' }
 ]
 const subroleValues = () => gameSubroles.map(i => ({ label: t(`game.subroles.${i}`), value: i }))
-const cleanerValues = () => cleaners.map(i => ({ label: t(`cleaners.${i}`), value: i }))
+const cleanerValues = () => gameCleaners.map(i => ({ label: t(`game.cleaners.${i}`), value: i }))
 const sortingValues = () => sortingTypes.map(i => ({ label: t(`sorting.${i}`), value: i }))
 
 const toggle = () => {

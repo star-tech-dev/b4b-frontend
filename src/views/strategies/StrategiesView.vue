@@ -28,7 +28,7 @@ onMounted(() => {
     <div class="container">
       <h1>
         <span>{{ t('pages.strategy.page_title') }}</span>
-        <span class="text-dark"> - всего {{ state.list.length }}</span>
+        <span class="text-dark"> - {{ t('subheading', { amount: state.list.length } ) }}</span>
       </h1>
 
       <FilterBar
@@ -48,6 +48,17 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "ru": {
+    "subheading": "всего {amount}"
+  },
+  "en": {
+    "subheading": "{amount} items"
+  }
+}
+</i18n>
 
 <style lang="scss" scoped>
 .page.-strategies {

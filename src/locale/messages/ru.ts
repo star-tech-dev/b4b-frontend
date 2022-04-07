@@ -11,27 +11,24 @@ export default {
 
     to_favorites: 'В избранное',
     like: 'Лайкнуть',
-    liked: 'Уже лайкнул'
+    liked: 'Уже лайкнул',
+
+    buffs: 'Бафы',
+    debuffs: 'Дебаффы'
   },
 
-  sorting: {
-    default: 'По умолчанию',
-    likes: 'По лайкам',
-    date: 'По дате',
-    random: 'Случайно'
-  },
-
-  filters: {
-    role: 'Роль',
-    subroles: 'Саброли',
-    cleaners: 'Чистильщики',
-    sorting: 'Сортировка'
+  statIndicators: {
+    offence: 'Атака',
+    defence: 'Защита',
+    utility: 'Полезность',
+    mobility: 'Мобильность',
+    economics: 'Экономика'
   },
 
   game: {
     roles: {
-      battle: 'Атакующая',
-      explore: 'Ловкость',
+      attack: 'Атака',
+      agility: 'Ловкость',
       support: 'Поддержка',
       any: 'Любая'
     },
@@ -54,6 +51,18 @@ export default {
       any: 'Любая'
     },
 
+    cleaners: {
+      evan: 'Эванджело',
+      walker: 'Уокер',
+      holly: 'Холли',
+      mom: 'Мать',
+      doc: 'Док',
+      hoffman: 'Хоффман',
+      jim: 'Джим',
+      karlee: 'Карли',
+      any: 'Любой'
+    },
+
     weapon: {
       sr: 'Снайперские винтовки',
       ar: 'Штурмовые винтовки',
@@ -63,16 +72,18 @@ export default {
     }
   },
 
-  cleaners: {
-    evan: 'Эванджело',
-    walker: 'Уокер',
-    holly: 'Холли',
-    mom: 'Мать',
-    doc: 'Док',
-    hoffman: 'Хоффман',
-    jim: 'Джим',
-    karlee: 'Карли',
-    any: 'Любой'
+  sorting: {
+    default: 'По умолчанию',
+    likes: 'По лайкам',
+    date: 'По дате',
+    random: 'Случайно'
+  },
+
+  filters: {
+    role: 'Роль',
+    subroles: 'Саброли',
+    cleaners: 'Чистильщики',
+    sorting: 'Сортировка'
   },
 
   pages: {

@@ -1,5 +1,6 @@
 import { Card } from '@/models/card'
 import { randomBool, randomNumber } from '@/helpers/random'
+import { repeat } from '@/helpers/repeat'
 
 export const card = () => new Card({
   id: '123123',
@@ -8,5 +9,7 @@ export const card = () => new Card({
   likes: randomNumber(0, 999),
   liked: randomBool()
 })
+
+export const deck = repeat(card(), 15)
 
 export const cards = [card(), card(), card()]

@@ -41,8 +41,8 @@ const difficultyValues = () => {
     value: 'any'
   }]
 }
-const cleanerValues = () => config.cleaners.map(value => ({
-  label: t(`cleaners.${value}`),
+const cleanerValues = () => config.gameCleaners.map(value => ({
+  label: t(`game.cleaners.${value}`),
   value
 }))
 const weaponValues = () => config.weaponAmmos.map(value => ({

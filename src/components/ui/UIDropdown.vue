@@ -239,6 +239,10 @@ const onValueChange = (e: any) => {
 
   &.-readonly {
     //pointer-events: none;
+
+    .selected {
+      white-space: normal;
+    }
   }
 
   &:not(.-readonly) {

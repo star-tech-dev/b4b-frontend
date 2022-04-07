@@ -11,27 +11,24 @@ export default {
 
     to_favorites: 'Add to favorites',
     like: 'Like this',
-    liked: 'Already liked'
+    liked: 'Already liked',
+
+    buffs: 'Buffs',
+    debuffs: 'Debuffs'
   },
 
-  sorting: {
-    default: 'Most popular',
-    likes: 'Likes amount',
-    date: 'Publish date',
-    random: 'Randomize'
-  },
-
-  filters: {
-    role: 'Role',
-    subroles: 'Subroles',
-    cleaners: 'Cleaners',
-    sorting: 'Sort by'
+  statIndicators: {
+    offence: 'Offence',
+    defence: 'Defence',
+    utility: 'Utility',
+    mobility: 'Mobility',
+    economics: 'Economics'
   },
 
   game: {
     roles: {
-      battle: 'Battle',
-      explore: 'Explore/run',
+      attack: 'Attack',
+      agility: 'Agility',
       support: 'Support',
       any: 'Any'
     },
@@ -54,6 +51,18 @@ export default {
       any: 'Any'
     },
 
+    cleaners: {
+      evan: 'Evan',
+      walker: 'Walker',
+      holly: 'Holly',
+      mom: 'Mom',
+      doc: 'Doc',
+      hoffman: 'Hoffman',
+      jim: 'Jim',
+      karlee: 'Karlee',
+      any: 'Anyone'
+    },
+
     weapon: {
       sr: 'Sniper rifles',
       ar: 'Assault rifles',
@@ -63,16 +72,18 @@ export default {
     }
   },
 
-  cleaners: {
-    evan: 'Evan',
-    walker: 'Walker',
-    holly: 'Holly',
-    mom: 'Mom',
-    doc: 'Doc',
-    hoffman: 'Hoffman',
-    jim: 'Jim',
-    karlee: 'Karlee',
-    any: 'Anyone'
+  sorting: {
+    default: 'Most popular',
+    likes: 'Likes amount',
+    date: 'Publish date',
+    random: 'Randomize'
+  },
+
+  filters: {
+    role: 'Role',
+    subroles: 'Subroles',
+    cleaners: 'Cleaners',
+    sorting: 'Sort by'
   },
 
   pages: {

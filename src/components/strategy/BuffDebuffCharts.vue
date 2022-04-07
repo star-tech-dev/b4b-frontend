@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import ChartDefault from '@/components/chart/ChartDefault.vue'
+import { useI18n } from 'vue-i18n'
 import { randomData as tempData } from '@/mock/chart'
+import { statIndicators } from '@/config'
+
+import ChartDefault from '@/components/chart/ChartDefault.vue'
+
+const { t } = useI18n()
+const indicators = statIndicators.map(i => t(`statIndicators.${i}`))
 </script>
 
 <template>
@@ -12,26 +18,10 @@ import { randomData as tempData } from '@/mock/chart'
         </div>
 
         <div class="legend">
-          <h3>Buffs</h3>
-          <div class="legend-item flex a-center">
+          <h3>{{ t('globals.buffs') }}</h3>
+          <div v-for="indicator in indicators" class="legend-item flex a-center" :key="indicator">
             <span>1</span>
-            <span>Атака</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>6</span>
-            <span>Защита</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>3</span>
-            <span>Мобильность</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>2</span>
-            <span>Полезность</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>4</span>
-            <span>Экономика</span>
+            <span>{{ indicator }}</span>
           </div>
         </div>
       </div>
@@ -44,26 +34,10 @@ import { randomData as tempData } from '@/mock/chart'
         </div>
 
         <div class="legend">
-          <h3>Debuffs</h3>
-          <div class="legend-item flex a-center">
+          <h3>{{ t('globals.debuffs') }}</h3>
+          <div v-for="indicator in indicators" class="legend-item flex a-center" :key="indicator">
             <span>1</span>
-            <span>Атака</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>6</span>
-            <span>Защита</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>3</span>
-            <span>Мобильность</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>2</span>
-            <span>Полезность</span>
-          </div>
-          <div class="legend-item flex a-center">
-            <span>4</span>
-            <span>Экономика</span>
+            <span>{{ indicator }}</span>
           </div>
         </div>
       </div>

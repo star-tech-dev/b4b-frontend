@@ -12,9 +12,10 @@ interface Props {
   data?: StrategyProps
 }
 
+const { t } = useI18n()
 const props = withDefaults(defineProps<Props>(), {})
 const data = reactive(new Strategy(props.data))
-const { t } = useI18n()
+const url = `/strategies/${data.id}`
 
 const onLike = (value: number) => {
   data.likes = value
@@ -31,7 +32,11 @@ const onDislike = (value: number) => {
   <div class="strategy flex a-center">
     <div class="section -info flex column j-between">
       <div>
-        <div class="title">{{ data.name }}</div>
+        <div class="title">
+          <RouterLink :to="url">
+            {{ data.name }}
+          </RouterLink>
+        </div>
         <div class="tags">
           <span>healer</span>
           <span>support</span>
@@ -39,17 +44,19 @@ const onDislike = (value: number) => {
         </div>
       </div>
       <div class="flex a-center j-between">
-        <RouterLink :to="`/strategies/${data.id}`">{{ t('more') }}</RouterLink>
+        <RouterLink :to="url">{{ t('more') }}</RouterLink>
         <Liker v-model="data.likes" :liked="data.liked" @like="onLike" @dislike="onDislike" />
       </div>
     </div>
 
     <div class="section -chart">
-      <ChartSimple :data="tempData()" />
+      <RouterLink :to="url">
+        <ChartSimple :data="tempData()" />
+      </RouterLink>
     </div>
 
     <div class="section">
-      deck
+      <div>deck</div>
     </div>
   </div>
 </template>
@@ -76,7 +83,13 @@ const onDislike = (value: number) => {
   border-radius: $border-radius-default;
 
   .title {
-    @extend %h3;
+    a {
+      @extend %h3;
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .tags {
@@ -110,6 +123,15 @@ const onDislike = (value: number) => {
     &.-chart {
       border-left: 1px solid $color-bg;
       border-right: 1px solid $color-bg;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

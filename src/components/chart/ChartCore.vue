@@ -2,6 +2,7 @@
 import type { ChartData, ChartOptions } from 'chart.js'
 import { onMounted, reactive, ref } from 'vue'
 import { Chart, registerables } from 'chart.js'
+import { useI18n } from 'vue-i18n'
 
 export type ChartTheme = 'blue' | 'red'
 
@@ -13,6 +14,7 @@ interface Props {
 
 Chart.register(...registerables)
 
+const { t } = useI18n()
 const props = withDefaults(defineProps<Props>(), {})
 const ctx = ref()
 const state = reactive({
@@ -33,8 +35,21 @@ const randomDataset = () => {
   }
 }
 
+const defaultLabels = () => [
+  t('statIndicators.mobility'),
+  t('statIndicators.defence'),
+  t('statIndicators.economics'),
+  t('statIndicators.utility'),
+  t('statIndicators.offence')
+]
+
 const chartData = () => {
   const data = props.data ? { ...props.data } : {} as ChartData
+
+  if (!data.labels) {
+    data.labels = defaultLabels()
+  }
+
   data.datasets = data.datasets || [randomDataset()]
 
   data.datasets = data.datasets.map(i => ({
