@@ -12,4 +12,4 @@ export const card = () => new Card({
 
 export const deck = repeat(card(), 15)
 
-export const cards = [card(), card(), card()]
+export const cards = (amount = 5) => repeat(card(), amount)
