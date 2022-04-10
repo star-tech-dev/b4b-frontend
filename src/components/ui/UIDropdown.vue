@@ -227,7 +227,7 @@ const onValueChange = (e: any) => {
         background: $color-bg-light;
       }
       .options {
-        box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.15);
         border-top: 1px solid $color-bg;
       }
     }
@@ -254,7 +254,7 @@ const onValueChange = (e: any) => {
   &:not(.-readonly):not(.-opened) {
     .select {
       &:hover {
-        background: $color-bg;
+        //background: $color-bg-light;
 
         .angle {
           opacity: 1;

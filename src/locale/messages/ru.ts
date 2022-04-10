@@ -71,7 +71,7 @@ export default {
 
   game: {
     roles: {
-      attack: 'Атака',
+      fighting: 'Сражения',
       agility: 'Ловкость',
       support: 'Поддержка',
       any: 'Любая'

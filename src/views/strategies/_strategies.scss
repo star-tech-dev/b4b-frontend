@@ -68,4 +68,12 @@
       }
     }
   }
+
+  .actions {
+    & > * {
+      &:hover {
+        background: $color-bg;
+      }
+    }
+  }
 }

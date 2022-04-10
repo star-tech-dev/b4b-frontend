@@ -81,7 +81,7 @@ const buttonProps = tag === 'button'
       color: $color-text-dark;
 
       &:hover {
-        background: $color-bg;
+        background: $color-bg-light;
         color: $color-text-white;
       }
     }
@@ -91,7 +91,7 @@ const buttonProps = tag === 'button'
       color: $color-primary;
 
       &:hover {
-        background: $color-bg;
+        background: $color-bg-dark;
         color: $color-primary;
       }
     }

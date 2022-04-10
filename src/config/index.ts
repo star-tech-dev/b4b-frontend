@@ -1,6 +1,6 @@
 // game
 export const gameDifficulties = ['recruit', 'veteran', 'nightmare']
-export const gameRoles = ['attack', 'agility', 'support']
+export const gameRoles = ['fighting', 'agility', 'support']
 export const gameSubroles = ['tank', 'medic', 'runner', 'shooter', 'damage', 'engineer', 'generalist']
 export const gameCleaners = ['evan', 'walker', 'holly', 'mom', 'doc', 'hoffman', 'jim', 'karlee']
 

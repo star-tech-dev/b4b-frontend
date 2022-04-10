@@ -8,7 +8,7 @@ export const strategy = () => new Strategy({
   likes: randomNumber(0, 999),
   liked: randomBool(),
   author: 'author_id',
-  roles: ['attack', 'agility'],
+  roles: ['fighting', 'agility'],
   subroles: ['tank', 'damage', 'engineer', 'runner'],
   ammo: ['smg', 'free'],
   cleaners: ['doc', 'mom'],

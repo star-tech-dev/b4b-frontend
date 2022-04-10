@@ -71,7 +71,7 @@ export default {
 
   game: {
     roles: {
-      attack: 'Attack',
+      fighting: 'Fighting',
       agility: 'Agility',
       support: 'Support',
       any: 'Any'

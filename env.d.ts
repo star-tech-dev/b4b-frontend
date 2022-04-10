@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-export type GameRole = 'attack' | 'agility' | 'support'
+export type GameRole = 'fighting' | 'agility' | 'support'
 export type GameSubrole = 'tank' | 'medic' | 'runner' | 'shooter' | 'damage' | 'engineer' | 'generalist'
 export type GameDifficulty = 'recruit' | 'veteran' | 'nightmare'
 

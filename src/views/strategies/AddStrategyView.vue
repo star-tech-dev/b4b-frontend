@@ -178,3 +178,21 @@ const save = () => {
   //
 }
 </style>
+
+<style lang="scss">
+@import "src/assets/scss/variables";
+
+.page.-add-strategy {
+  .dropdowns {
+    .ui-dropdown {
+      &:not(.-opened) {
+        .select {
+          &:hover {
+            background: $color-bg;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
