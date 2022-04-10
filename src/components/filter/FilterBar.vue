@@ -136,12 +136,25 @@ watch(state, () => {
 
     <template v-if="isOpened">
       <div class="actions">
-        <a href="#" @click.prevent="close">Свернуть панель</a>
-        <a href="#" class="secondary" @click.prevent="reset">Сбросить все фильтры</a>
+        <a href="#" @click.prevent="close">{{ t('close') }}</a>
+        <a href="#" class="secondary" @click.prevent="reset">{{ t('reset') }}</a>
       </div>
     </template>
   </div>
 </template>
+
+<i18n>
+{
+  "ru": {
+    "close": "Свернуть панель",
+    "reset": "Сбросить все фильтры"
+  },
+  "en": {
+    "close": "Collapse the panel",
+    "reset": "Clear all filters"
+  }
+}
+</i18n>
 
 <style lang="scss" scoped>
 @import "src/assets/scss/variables";

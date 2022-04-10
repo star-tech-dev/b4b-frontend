@@ -51,6 +51,7 @@ const buttonProps = tag === 'button'
   cursor: pointer;
   transition: $transition-button;
   outline: none;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: none;
@@ -107,7 +108,7 @@ const buttonProps = tag === 'button'
   .content {
     svg {
       margin-right: 15px;
-      min-width: 22px;
+      min-width: 26px;
     }
   }
 }

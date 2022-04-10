@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useStore } from 'vuex'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 import LocaleSwitcher from '@/components/locale/LocaleSwitcher.vue'
@@ -8,9 +8,29 @@ import logoImage from '@/assets/img/logo.svg'
 
 const { t } = useI18n()
 const store = useStore()
+const route = useRoute()
+const navItems = [
+  {
+    to: '/strategies',
+    label: t('nav.strategies')
+  },
+  {
+    to: '/cards',
+    label: t('nav.cards')
+  },
+  {
+    to: '/weapon',
+    label: t('nav.weapon')
+  },
+  {
+    to: '/cleaners',
+    label: t('nav.cleaners')
+  }
+]
+
+const isActive = (path: string) => route.fullPath.includes(path)
 
 const onLogin = () => {
-  console.log('onLogin')
   store.dispatch('modals/open', 'auth')
 }
 </script>
@@ -27,10 +47,14 @@ const onLogin = () => {
       </div>
 
       <nav class="flex a-center">
-        <RouterLink to="/strategies">{{ t('nav.strategies') }}</RouterLink>
-        <RouterLink to="/cards">{{ t('nav.cards') }}</RouterLink>
-        <RouterLink to="/weapon">{{ t('nav.weapon') }}</RouterLink>
-        <RouterLink to="/cleaners">{{ t('nav.cleaners') }}</RouterLink>
+        <RouterLink
+            v-for="(item, i) in navItems"
+            :class="isActive(item.to) ? 'active' : ''"
+            :to="item.to"
+            :key="i"
+        >
+          {{ item.label }}
+        </RouterLink>
         <a class="active" href="#" @click.prevent="onLogin">{{ t('nav.login') }}</a>
       </nav>
     </div>

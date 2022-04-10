@@ -47,7 +47,7 @@ onMounted(() => {
   <div class="card-picker">
     <section class="selected-cards">
       <div class="container">
-        <h3>{{ t('pages.strategy.selected_cards') }}</h3>
+        <h3>{{ t('globals.selected_cards') }}</h3>
         <div class="list flex a-center j-between">
           <div v-for="i in 15" :key="i" class="mini-card">+</div>
         </div>
@@ -56,7 +56,7 @@ onMounted(() => {
 
     <section>
       <div class="container">
-        <h3>{{ t('pages.strategy.all_cards') }}</h3>
+        <h3>{{ t('globals.all_cards') }}</h3>
         <div class="all-cards">
           <div class="swiper">
             <div class="swiper-wrapper">
@@ -85,7 +85,7 @@ onMounted(() => {
             <IconAngleSlider/>
           </div>
 
-          <div class="pagination">{{ t('pages.strategy.page')}} {{ state.currentPage }} {{ t('pages.strategy.from')}} {{ state.totalSlides }}</div>
+          <div class="pagination">{{ t('globals.page')}} {{ state.currentPage }} {{ t('globals.of')}} {{ state.totalSlides }}</div>
         </div>
       </div>
     </section>

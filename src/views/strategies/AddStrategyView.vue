@@ -74,7 +74,7 @@ const save = () => {
         <div class="block -primary flex column j-between">
           <div>
             <div class="title">
-              <input :placeholder="t('pages.strategy.strategy_name')" autofocus/>
+              <input :placeholder="t('strategy_name')" autofocus/>
             </div>
 
             <div class="dropdowns">
@@ -116,15 +116,15 @@ const save = () => {
           <div class="actions">
             <UIButton theme="ghost" full-width @click="clear">
               <IconTrash/>
-              <span>{{ t('pages.strategy.clear') }}</span>
+              <span>{{ t('actions.clear') }}</span>
             </UIButton>
             <UIButton theme="ghost" full-width @click="save">
               <IconBookmark/>
-              <span>{{ t('pages.strategy.save') }}</span>
+              <span>{{ t('actions.save') }}</span>
             </UIButton>
             <UIButton theme="ghost-primary" full-width @click="save">
               <IconCheckRound/>
-              <span>{{ t('pages.strategy.publish') }}</span>
+              <span>{{ t('actions.publish') }}</span>
             </UIButton>
           </div>
         </div>
@@ -135,21 +135,21 @@ const save = () => {
       </section>
 
       <section>
-        <h3>{{ t('pages.strategy.weapon_strategy') }}</h3>
+        <h3>{{ t('globals.weapon_strategy') }}</h3>
         <div class="weapon-dropdowns flex a-center">
           <UIDropdown
               v-model="state.weapon.recommended"
               :values="recommendedWeaponValues()"
               multiple
           >
-            {{ t('pages.strategy.recommended_weapon') }}
+            {{ t('globals.recommended_weapon') }}
           </UIDropdown>
           <UIDropdown
               v-model="state.weapon.unwanted"
               :values="weaponValues()"
               multiple
           >
-            {{ t('pages.strategy.unwanted_weapon') }}
+            {{ t('globals.unwanted_weapon') }}
           </UIDropdown>
         </div>
       </section>
@@ -158,6 +158,19 @@ const save = () => {
     <CardPicker />
   </div>
 </template>
+
+<i18n>
+{
+  "ru": {
+    "strategy_name": "Название стратегии",
+    "weapon_strategy": ""
+  },
+  "en": {
+    "strategy_name": "Strategy name",
+    "weapon_strategy": ""
+  }
+}
+</i18n>
 
 <style src="./_strategies.scss" lang="scss" scoped></style>
 <style lang="scss" scoped>

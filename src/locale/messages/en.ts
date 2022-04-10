@@ -9,12 +9,36 @@ export default {
     not_selected: 'Select',
     any: 'Any',
 
-    to_favorites: 'Add to favorites',
-    like: 'Like this',
-    liked: 'Already liked',
-
     buffs: 'Buffs',
-    debuffs: 'Debuffs'
+    debuffs: 'Debuffs',
+
+    weapon_strategy: 'Weapon strategy',
+    recommended_weapon: 'Recommended weapon',
+    unwanted_weapon: 'Unwanted weapon',
+
+    deck: 'Deck',
+    selected_cards: 'Selected cards',
+    all_cards: 'All cards',
+
+    page: 'Page',
+    of: 'of',
+    shown: 'Shown'
+  },
+
+  sections: {
+    strategies: 'Strategies',
+    cards: 'Cards',
+    weapon: 'Weapon',
+    cleaners: 'Cleaners'
+  },
+
+  actions: {
+    clear: 'Clear form',
+    save: 'Save the strategy',
+    publish: 'Publish the strategy',
+    like: 'I like it',
+    liked: 'Already liked',
+    to_favorites: 'Add to favourites'
   },
 
   statIndicators: {
@@ -23,6 +47,26 @@ export default {
     utility: 'Utility',
     mobility: 'Mobility',
     economics: 'Economics'
+  },
+
+  card: {
+    class: 'Class',
+    class_values: {
+      reflex: 'Reflex',
+      discipline: 'Discipline',
+      brawn: 'Brawn',
+      fortune: 'Fortune'
+    },
+
+    type: 'Type',
+    type_values: {
+      offence: 'Offence',
+      defence: 'Defence',
+      utility: 'Utility',
+      mobility: 'Mobility'
+    },
+
+    cleaners: 'Cleaners'
   },
 
   game: {
@@ -83,23 +127,8 @@ export default {
     role: 'Role',
     subroles: 'Subroles',
     cleaners: 'Cleaners',
-    sorting: 'Sort by'
-  },
-
-  pages: {
-    strategy: {
-      page_title: 'Strategies',
-      strategy_name: 'Title',
-      clear: 'Clear form',
-      save: 'Save the strategy',
-      publish: 'Publish the strategy',
-      recommended_weapon: 'Recommended weapon',
-      unwanted_weapon: 'Unwanted weapon',
-      weapon_strategy: 'Weapon strategy',
-      selected_cards: 'Selected cards',
-      all_cards: 'All cards',
-      page: 'Page',
-      from: 'from'
-    }
+    sorting: 'Sort by',
+    close: 'Close filters',
+    reset: 'Clear all filters'
   }
 }

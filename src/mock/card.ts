@@ -6,6 +6,8 @@ export const card = () => new Card({
   id: '123123',
   alias: '123123',
   name: 'Card name',
+  cleaners: [],
+
   likes: randomNumber(0, 999),
   liked: randomBool()
 })

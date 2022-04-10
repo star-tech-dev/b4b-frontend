@@ -12,6 +12,15 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 const chartOptions = {
+  elements: {
+    point: {
+      radius: 2,
+      hoverRadius: 2
+    },
+    line: {
+      borderWidth: 2
+    }
+  },
   scales: {
     r: {
       angleLines: {
@@ -26,12 +35,7 @@ const chartOptions = {
         color: '#262829'
       },
       pointLabels: {
-        color: '#5D626F',
-        font: {
-          size: 11,
-          lineHeight: 1.4,
-          family: 'Montserrat'
-        }
+        display: false
       }
     }
   }

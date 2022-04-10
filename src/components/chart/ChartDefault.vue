@@ -12,6 +12,15 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 const chartOptions = {
+  elements: {
+    point: {
+      radius: 3,
+      hoverRadius: 5
+    },
+    line: {
+      borderWidth: 2
+    }
+  },
   scales: {
     r: {
       angleLines: {

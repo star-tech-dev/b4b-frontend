@@ -17,9 +17,9 @@ import ModalController from '@/components/modals/ModalController.vue'
 
 <style lang="scss">
 .layout.-default {
-  & > .page {
-    margin-top: 80px;
-    margin-bottom: 60px;
+  .page {
+    margin-top: 40px;
+    margin-bottom: 100px;
   }
 }
 </style>

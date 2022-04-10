@@ -63,18 +63,12 @@ const chartData = () => {
 }
 
 const chartOptions = () => ({
-  elements: {
-    point: {
-      radius: 3,
-      hoverRadius: 5
-    },
-    line: {
-      borderWidth: 2
-    }
-  },
   plugins: {
     legend: {
       display: false
+    },
+    tooltip: {
+      enabled: false
     }
   },
   layout: {

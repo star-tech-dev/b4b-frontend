@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import StrategiesView from '../views/strategies/StrategiesView.vue'
 import StrategyView from '../views/strategies/StrategyView.vue'
 import CardsView from '../views/cards/CardsView.vue'
+import CardView from '../views/cards/CardView.vue'
 import WeaponsView from '../views/weapons/WeaponsView.vue'
 import CleanersView from '../views/cleaners/CleanersView.vue'
 
@@ -43,7 +44,7 @@ const router = createRouter({
     },
     {
       path: '/strategies/:id',
-      name: 'strategy',
+      name: 'strategies.strategy',
       component: StrategyView
     },
 
@@ -54,6 +55,11 @@ const router = createRouter({
       path: '/cards',
       name: 'cards',
       component: CardsView
+    },
+    {
+      path: '/cards/:alias',
+      name: 'cards.card',
+      component: CardView
     },
 
     /**

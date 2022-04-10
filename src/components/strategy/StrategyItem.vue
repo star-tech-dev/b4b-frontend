@@ -5,8 +5,8 @@ import { useI18n } from 'vue-i18n'
 import { Strategy } from '@/models/strategy'
 import { randomData as tempData } from '@/mock/chart'
 
+import ChartDefault from '@/components/chart/ChartDefault.vue'
 import Liker from '@/components/like/LikerCompact.vue'
-import ChartSimple from '@/components/chart/ChartSimple.vue'
 import CardItem from '@/components/card/CardItem.vue'
 
 interface Props {
@@ -52,7 +52,7 @@ const onDislike = (value: number) => {
 
     <div class="section -chart">
       <RouterLink :to="url">
-        <ChartSimple :data="tempData()" />
+        <ChartDefault :data="tempData()" />
       </RouterLink>
     </div>
 

@@ -19,6 +19,6 @@ const toggle = () => {
 <template>
   <UIButton theme="ghost-primary" full-width @click="toggle">
     <IconHeart/>
-    <span>{{ t('actions.like') }}</span>
+    <span>{{ t('actions.to_favourites') }}</span>
   </UIButton>
 </template>

@@ -48,6 +48,11 @@ const onClick = () => {
     min-width: 10px;
   }
 
+  svg {
+    width: 18px;
+    height: 16px;
+  }
+
   &.-liked {
     svg {
       color: $color-warning;

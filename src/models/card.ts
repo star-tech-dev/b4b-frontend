@@ -1,4 +1,4 @@
-import type { StatIndicator } from '../../env'
+import type { CleanerID, StatIndicator } from '../../env'
 import type { FeatureProps } from './feature'
 import { Feature } from './feature'
 
@@ -14,6 +14,7 @@ export interface CardProps {
   statIndicator?: StatIndicator,
   features?: Feature[],
   affects?: Feature[],
+  cleaners?: CleanerID[]
   likes?: number,
   liked?: boolean
 }
@@ -27,6 +28,7 @@ export class Card {
   public statIndicator: StatIndicator
   public features: Feature[]
   public affects: Feature[]
+  public cleaners: CleanerID[]
 
   public likes: number
   public liked: boolean
@@ -40,6 +42,7 @@ export class Card {
     this.statIndicator = props.statIndicator || 'offence'
     this.features = props.features ? props.features.map(i => new Feature(i as FeatureProps)) : []
     this.affects = props.affects ? props.affects.map(i => new Feature(i as FeatureProps)) : []
+    this.cleaners = props.cleaners || []
     this.likes = props.likes || 0
     this.liked = props.liked || false
   }

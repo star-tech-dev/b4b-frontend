@@ -27,7 +27,7 @@ onMounted(() => {
   <div class="page -strategies">
     <div class="container">
       <h1>
-        <span>{{ t('pages.strategy.page_title') }}</span>
+        <span>{{ t('sections.strategies') }}</span>
         <span class="text-dark"> - {{ t('subheading', { amount: state.list.length } ) }}</span>
       </h1>
 
@@ -40,7 +40,7 @@ onMounted(() => {
       <section class="list">
         <template v-if="state.list.length">
           <StrategyItem v-for="item in state.list" :data="item" :key="item.id"/>
-          <div class="flex center">показано {{ state.list.length }}</div>
+          <div class="flex center">{{ t('globals.shown') }} {{ state.list.length }}</div>
         </template>
 
         <div v-else>no items found</div>

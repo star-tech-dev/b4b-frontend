@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { strategy } from '@/mock/strategies'
 import { Strategy } from '@/models/strategy'
 
+import BreadCrumbs from '@/components/breadcrumbs/BreadCrumbs.vue'
 import BuffDebuffCharts from '@/components/strategy/BuffDebuffCharts.vue'
 import StrategyItemCompact from '@/components/strategy/StrategyItemCompact.vue'
 import LikerButton from '@/components/like/LikerButton.vue'
@@ -39,11 +40,15 @@ onMounted(() => {
   <div class="page -strategy">
     <template v-if="state.data">
       <div class="container">
+        <div class="breadcrumbs-parent">
+          <BreadCrumbs :lastElement="state.data.name"/>
+        </div>
+
         <section class="flex">
           <div class="block -primary flex column j-between">
             <div>
               <div class="title">
-                <input :value="state.data.name" :placeholder="t('pages.strategy.strategy_name')" readonly/>
+                <input :value="state.data.name" :placeholder="t('strategy_name')" readonly/>
               </div>
 
               <div class="dropdowns">
@@ -81,9 +86,9 @@ onMounted(() => {
             <div class="actions">
               <UIButton theme="ghost" full-width @click="toggleFavorites">
                 <IconBookmark/>
-                <span>{{ t('globals.to_favorites') }}</span>
+                <span>{{ t('actions.to_favorites') }}</span>
               </UIButton>
-              <LikerButton/>
+              <LikerButton type="strategy" :target="state.data.id" />
             </div>
           </div>
 
@@ -93,7 +98,7 @@ onMounted(() => {
         </section>
 
         <section class="deck">
-          <h3>{{ t('deck') }}</h3>
+          <h3>{{ t('globals.deck') }}</h3>
           <div class="grid">
             <CardItem v-for="card in state.data.deck" :key="card.id"/>
           </div>
@@ -112,6 +117,7 @@ onMounted(() => {
 <!--      </section>-->
     </template>
 
+    <!-- TODO: заменить на лоадер -->
     <template v-else>
       <div>loading...</div>
     </template>
@@ -121,11 +127,9 @@ onMounted(() => {
 <i18n>
 {
   "ru": {
-    "deck": "Колода",
     "similar": "Похожие стратегии"
   },
   "en": {
-    "deck": "Deck",
     "similar": "Similar strategies"
   }
 }
