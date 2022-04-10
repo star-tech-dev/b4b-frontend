@@ -4,11 +4,15 @@ import { ref, onMounted, watch, reactive } from 'vue'
 type Mode = 'default' | 'expanded'
 
 interface Props {
-  gap?: number
+  gap?: number,
+  noScrollBorder?: number,
+  compressionRatio?: number // 2 = 50%, 1 = 100%
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  gap: 10
+  gap: 10,
+  noScrollBorder: 30,
+  compressionRatio: 2
 })
 const state = reactive({
   slides: [] as HTMLElement[]
@@ -19,7 +23,7 @@ const list = ref()
 
 const fit = () => {
   state.slides.forEach((item: HTMLElement, i) => {
-    const value = (item.offsetWidth / 2 + props.gap) * i
+    const value = (item.offsetWidth / props.compressionRatio + props.gap) * i
     item.style.transform = `translate(-${value}px, 0)`
   })
 
@@ -47,12 +51,20 @@ const calculateScrollPercent = (mouseX: number) => {
   const sliderRect = slider.value.getBoundingClientRect()
   console.log('slider range', sliderRect.x, sliderRect.x + sliderRect.width)
   console.log('mouse value', mouseX)
-  const right = (sliderRect.x + sliderRect.width) - mouseX
-  console.log('right', right)
-  const ost = mouseX - sliderRect.x
-  console.log('ost', ost)
-  const percent = Math.round(ost / (sliderRect.width / 100))
+  const fromRight = (sliderRect.x + sliderRect.width) - mouseX
+  console.log('fromRight', fromRight)
+  const fromLeft = mouseX - sliderRect.x - props.noScrollBorder
+  console.log('fromLeft', fromLeft)
+
+  if (fromLeft < 0) return 0
+  if (fromRight < 0) return 100
+
+  const percent = Math.round(fromLeft / ((sliderRect.width - (props.noScrollBorder * 2)) / 100))
   console.log('percent', percent)
+
+  if (percent < 0) return 0
+  if (percent > 100) return 100
+
   return percent
 }
 
@@ -90,7 +102,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="slider" class="deck-slider" @mouseenter="onMouseEnter" @mousemove="onMouseMove" @mouseleave="onMouseLeave">
+  <div ref="slider" :class="`deck-slider -mode-${mode}`" @mouseenter="onMouseEnter" @mousemove="onMouseMove" @mouseleave="onMouseLeave">
     <div ref="list" class="list flex a-center">
       <slot/>
     </div>
@@ -101,11 +113,35 @@ onMounted(() => {
 @import "src/assets/scss/variables";
 
 .deck-slider {
+  position: relative;
   width: 100%;
   overflow: hidden;
 
   .list {
     width: auto;
+    transition: $transition-deck-slider;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    background-image: linear-gradient(90deg, rgba($color-bg-light, 0) 0%, $color-bg-light 100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition-default;
+  }
+
+  &.-mode {
+    &-default {
+      &:after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
 }
 </style>

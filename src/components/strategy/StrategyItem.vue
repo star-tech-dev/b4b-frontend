@@ -139,7 +139,7 @@ const onDislike = (value: number) => {
     }
 
     &.-deck {
-      padding: 0 20px;
+      padding: 0 30px;
       overflow: hidden;
     }
   }
