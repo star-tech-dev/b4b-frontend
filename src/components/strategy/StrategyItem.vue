@@ -6,6 +6,7 @@ import { Strategy } from '@/models/strategy'
 import { randomData as tempData } from '@/mock/chart'
 
 import ChartDefault from '@/components/chart/ChartDefault.vue'
+import DeckSlider from '@/components/slider/DeckSlider.vue'
 import Liker from '@/components/like/LikerCompact.vue'
 import CardItem from '@/components/card/CardItem.vue'
 
@@ -57,9 +58,9 @@ const onDislike = (value: number) => {
     </div>
 
     <div class="section -deck">
-      <div class="flex a-center j-start">
+      <DeckSlider>
         <CardItem v-for="card in props.data.deck" :data="card" size="small" :key="card.id"/>
-      </div>
+      </DeckSlider>
     </div>
   </div>
 </template>
@@ -138,6 +139,7 @@ const onDislike = (value: number) => {
     }
 
     &.-deck {
+      padding: 0 20px;
       overflow: hidden;
     }
   }
