@@ -13,7 +13,8 @@ const layout = computed(() => {
 onMounted(() => {
   // Setting current locale value into html tag
   const html = document.querySelector('html')
-  html && html.setAttribute('lang', i18n.locale.value || i18n.fallbackLocale.value)
+  const lang = i18n.locale.value || i18n.fallbackLocale.value as string
+  html && html.setAttribute('lang', lang)
 })
 </script>
 

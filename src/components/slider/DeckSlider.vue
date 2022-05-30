@@ -47,20 +47,14 @@ const init = () => {
 }
 
 const calculateScrollPercent = (mouseX: number) => {
-  console.log('------')
   const sliderRect = slider.value.getBoundingClientRect()
-  console.log('slider range', sliderRect.x, sliderRect.x + sliderRect.width)
-  console.log('mouse value', mouseX)
   const fromRight = (sliderRect.x + sliderRect.width) - mouseX
-  console.log('fromRight', fromRight)
   const fromLeft = mouseX - sliderRect.x - props.noScrollBorder
-  console.log('fromLeft', fromLeft)
 
   if (fromLeft < 0) return 0
   if (fromRight < 0) return 100
 
   const percent = Math.round(fromLeft / ((sliderRect.width - (props.noScrollBorder * 2)) / 100))
-  console.log('percent', percent)
 
   if (percent < 0) return 0
   if (percent > 100) return 100
@@ -71,11 +65,8 @@ const calculateScrollPercent = (mouseX: number) => {
 const scrollSlider = (mouseX: number) => {
   const percent = calculateScrollPercent(mouseX)
   const totalWidth = state.slides.length * state.slides[0].offsetWidth + (props.gap * state.slides.length - 1) - slider.value.offsetWidth
-  console.log('totalWidth', totalWidth)
   const scrollValueOfTotalWidth = Math.round(totalWidth / 100 * percent)
-  console.log('scrollValueOfTotalWidth', scrollValueOfTotalWidth)
   list.value.style.transform = `translate(${-scrollValueOfTotalWidth}px, 0)`
-  // 1790
 }
 
 const onMouseEnter = () => {
